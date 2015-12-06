@@ -6,3 +6,6 @@ node_js:
   - "0.11"
   - "0.10"
   - "iojs"
+notifications:
+  webhooks: https://hook.bearychat.com/=bw7sM/travis/7a91c149f923691380ef5efaf60396a8
+
