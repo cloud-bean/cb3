@@ -1,0 +1,26 @@
+{
+  "name": "cb3.0-cloud-bean",
+  "version": "1.0.0",
+  "description": "we build cloud-bean 3.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cloud-bean/cb3.git"
+  },
+  "keywords": [
+    "cb3"
+  ],
+  "author": "hgykui",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cloud-bean/cb3/issues"
+  },
+  "homepage": "https://github.com/cloud-bean/cb3",
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^2.3.4"
+  }
+}
