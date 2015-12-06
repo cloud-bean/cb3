@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/cloud-bean/cb3.svg?branch=master)](https://travis-ci.org/cloud-bean/cb3)
+
 # cb3
 we build cloud-bean 3.0
 
