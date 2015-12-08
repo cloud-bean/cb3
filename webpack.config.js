@@ -1,6 +1,11 @@
 var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const autoprefixer = require('autoprefixer');
+const path = require('path');
 
 module.exports = {
+	context: __dirname,
+	devtool: 'inline-source-map',
 	entry: [
 		'webpack-dev-server/client?http://localhost:8080',
 		'webpack/hot/only-dev-server',
@@ -14,14 +19,8 @@ module.exports = {
 				loader: 'react-hot!babel'
 			},
 			{
-				test    : /(\.scss|\.css)$/,
-				include : /(node_modules)\/react-toolbox/,
-				loaders : [
-					require.resolve('style-loader'),
-					require.resolve('css-loader') + '?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-					require.resolve('sass-loader') + '?sourceMap',
-					'toolbox'
-				]
+				test: /(\.scss|\.css)$/,
+				loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass?sourceMap')
 			},
 			{
 				test: /\.(png|woff|woff2|eot|ttf|svg)$/,
@@ -29,11 +28,12 @@ module.exports = {
 			}
 		]
 	},
+	postcss: [autoprefixer],
 	resolve: {
 		extensions: ['', '.js', '.jsx', '.scss']
 	},
 	output: {
-		path: __dirname + '/dist/',
+		path: path.join(__dirname, 'dist'),
 		publicPath: '/',
 		filename: 'bundle.js'
 	},
@@ -42,6 +42,7 @@ module.exports = {
 		hot: true
 	},
 	plugins: [
+		new ExtractTextPlugin('bundle.css', { allChunks: true }),
 		new webpack.HotModuleReplacementPlugin()
 	]
 };
