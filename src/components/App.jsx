@@ -9,6 +9,7 @@ export default React.createClass({
 				<ul className="menu">
 					<li><Link to="/">Dashboard</Link></li>
 					<li><Link to="/member">Member</Link></li>
+					<li><Link to="/inventory">Inventory</Link></li>
 					<li><Link to="/help">Help</Link></li>
 				</ul>
 				{this.props.children}
