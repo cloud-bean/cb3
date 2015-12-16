@@ -3,6 +3,9 @@
 # cb3
 we build cloud-bean 3.0
 
+# Hot-loader
+`$ webpack-dev-server`
+
 # 项目启动时间
 2015-11-18
 
