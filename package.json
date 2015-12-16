@@ -57,6 +57,7 @@
     "normalize.css": "^3.0.3",
     "react": "^0.14.3",
     "react-addons-css-transition-group": "^0.14.3",
+    "react-d3": "^0.4.0",
     "react-dom": "^0.14.3",
     "react-router": "^1.0.1",
     "react-toolbox": "^0.13.3"

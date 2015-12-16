@@ -10,7 +10,7 @@ var InventoryList = React.createClass({
     var InventoryNodes = this.props.data.map(function (Inventory, index) {
       return (
         <ListItem
-        avatar={Inventory.img_url}
+        avatar={Inventory.img}
         caption={Inventory.name}
         legend={Inventory.inv_code} />
       );
