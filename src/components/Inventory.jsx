@@ -3,11 +3,13 @@ import $ from 'jquery';
 import { List, ListItem, ListSubHeader, ListDivider, ListCheckbox } from 'react-toolbox/lib/List';
 import ProgressBar from 'react-toolbox/lib/progress_bar';
 
+
 const getTop25InventoryUrl = 'http://120.25.227.156:8000/inventories/page/1/10';
 
 
 export class InventoryList extends Component {
   render(){
+
     return (
       <div>
         <List selectable ripple>
