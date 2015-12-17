@@ -1,7 +1,11 @@
 import React,{Component} from 'react';
+import { connect,Provider} from 'react-redux';
 import $ from 'jquery';
 import { List, ListItem, ListSubHeader, ListDivider, ListCheckbox } from 'react-toolbox/lib/List';
 import ProgressBar from 'react-toolbox/lib/progress_bar';
+import {
+  requestPosts, receivePosts
+} from '../actions/inventoryAction';
 
 
 const getTop25InventoryUrl = 'http://120.25.227.156:8000/inventories/page/1/10';
@@ -48,33 +52,34 @@ class InventoryModule extends Component {
 
   constructor() {
    super();
-   this.state = {
-     inventories: [],
-     loading: true,
-     progress: 0
-   };
-    $.get(getTop25InventoryUrl, (result)=>{
-        //  if (!this.isMounted()) return;
-         this.setState({
-           inventories: result,
-           loading: false,
-           progress: 100
-         })
-    });
+  //  this.state = {
+  //    inventories: [],
+  //    loading: true,
+  //    progress: 0
+  //  };
+  //   $.get(getTop25InventoryUrl, (result)=>{
+  //       //  if (!this.isMounted()) return;
+  //        this.setState({
+  //          inventories: result,
+  //          loading: false,
+  //          progress: 100
+  //        })
+  //   });
   };
 
+
+
   render(){
-
+    const {dispatch,data,isFetching} = this.props;
+    console.log('isFetching:'+isFetching);
     return (
-
         <div>
-          { this.state.loading ?
+          { isFetching ?
               <ProgressBar mode='indeterminate' />
               : null
           }
-          <InventoryList data={this.state.inventories} />
+          <InventoryList data={data} />
         </div>
-
     );
   }
 }
@@ -112,4 +117,11 @@ class InventoryModule extends Component {
 //   }
 // })
 
-export default InventoryModule;
+function select(state) {
+  return {
+    data: state.items,
+    isFetching:state.isFetching
+  };
+}
+
+export default connect(select)(InventoryModule);
