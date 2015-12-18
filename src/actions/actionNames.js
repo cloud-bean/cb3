@@ -1,0 +1,3 @@
+export const GET_INVENTORY = 'GET_INVENTORY';
+export const REQUEST_POSTS = 'REQUEST_POSTS';
+export const RECEIVE_POSTS = 'RECEIVE_POSTS';
