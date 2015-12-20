@@ -1,5 +1,6 @@
 import React from 'react';
 import {PieChart, BarChart} from 'react-d3';
+import Button from 'react-toolbox/lib/button';
 
 const pieData = [
   {label: '铁杆会员', value: 10.0},
@@ -12,7 +13,7 @@ const pieData = [
 const barData = [
   {
     name: "会员数量",
-    values: [ { x: 2014.10, y: 20 }, { x: 2014.11, y: 40 }, { x: 2014.12, y: 50 }, 
+    values: [ { x: 2014.10, y: 20 }, { x: 2014.11, y: 40 }, { x: 2014.12, y: 50 },
     { x: 2015.01, y: 50 }, { x: 2015.02, y: 50 },  { x: 2015.02, y: 60 },
     { x: 2015.12, y: 80 } ],
     strokeWidth: 3,
@@ -57,9 +58,34 @@ export default React.createClass({
 
         <h3>反馈</h3>
         <span>推荐购书，意见建议，其他</span>
-        
+
         <h3>系统运行状态</h3>
-        <span>主机状态，数据备份情况，异常错误日志</span>
+        <hr/>
+        <h4>主机状态</h4>
+        <pre>
+        CPU: 38%   <br/>
+        MEM: 43%  <br/>
+        DISK: 12%  <br/>
+        LOAD: 31%  <br/>
+        </pre>
+
+        <h4>日志查询</h4>
+        <Button label='show logs details'  accent />
+        <pre>
+        Err: 0 <br/>
+        Warning: 22  <br/>
+        Info: 321  <br/>
+        </pre>
+
+        <br/>
+        <h4>数据备份</h4>
+        <Button label='backup DB'  accent/>
+        <br/>
+        Lasted backup files:
+        <ul>
+          <li>backup_hbg_dev_20151217120212.zip</li>
+          <li>backup_hbg_dev_20151218102249.zip</li>
+        </ul>
 		</div>
 	}
 });

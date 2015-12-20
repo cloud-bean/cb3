@@ -3,3 +3,4 @@ node_modules/
 dist/bundle.js
 dist/bundle.css
 libs/
+*.log
