@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/cloud-bean/cb3.svg?branch=master)](https://travis-ci.org/cloud-bean/cb3)
+[![Coverage Status](https://coveralls.io/repos/cloud-bean/cb3/badge.svg?branch=master&service=github)](https://coveralls.io/github/cloud-bean/cb3?branch=master)
 
 # cb3
 we build cloud-bean 3.0
