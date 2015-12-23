@@ -48,7 +48,6 @@ class InventoryModule extends Component {
 
   render(){
     const {dispatch, data, isFetching} = this.props;
-    console.log('isFetching:' + isFetching);
     return (
         <div>
           { isFetching ?
