@@ -23,3 +23,4 @@
 
 ## 仪式感
 形式就是实质，待我慢慢思考
+The meaning of life is to find your gift. The purpose of life is to give it away.
