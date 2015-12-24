@@ -4,7 +4,8 @@
   "description": "we build cloud-bean 3.0",
   "scripts": {
     "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "test": "./node_modules/mocha/bin/mocha  --compilers js:babel-core/register --require ./test/testHelper.js 'test/**/*.@(js|jsx)'"
+    "test": "./node_modules/mocha/bin/mocha  --compilers js:babel-core/register --require ./test/testHelper.js 'test/**/*.@(js|jsx)'",
+    "test-cov": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --  --compilers js:babel-core/register  'test/**/*.@(js|jsx)'"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,8 @@
     "expect.js": "^0.3.1",
     "extract-text-webpack-plugin": "^0.9.1",
     "file-loader": "^0.8.5",
+    "istanbul": "^0.4.1",
+    "istanbul-harmony": "^0.3.16",
     "jasmine": "^2.4.1",
     "jasmine-core": "^2.4.1",
     "jsdom": "^3.1.2",
