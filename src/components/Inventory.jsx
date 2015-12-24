@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { connect, Provider } from 'react-redux';
 import $ from 'jquery';
+
 import { List, ListItem, ListSubHeader, ListDivider, ListCheckbox } from 'react-toolbox/lib/List';
 import ProgressBar from 'react-toolbox/lib/progress_bar';
-import { requestPosts, receivePosts } from '../actions/inventoryAction';
+
+import { requestPosts, receivePosts, fetchPosts } from '../actions/inventoryAction';
+import store from '../reduxStore';
+
+const getTop25InventoryUrl = 'http://120.25.227.156:8000/inventories/page/1/10';
 
 class InventoryNode extends Component {
   render(){
@@ -22,6 +27,9 @@ class InventoryNode extends Component {
 
 
 class InventoryList extends Component {
+
+
+
   render(){
     return (
       <div>
@@ -29,7 +37,7 @@ class InventoryList extends Component {
           <ListSubHeader caption='Inventories' />
           {this.props.data.map((inventory,index)=>{
             return(
-              <InventoryNode {...inventory}>
+              <InventoryNode {...inventory} key={index}>
               </InventoryNode>
             )
           })
@@ -46,8 +54,16 @@ class InventoryModule extends Component {
    super();
   };
 
+    componentDidMount() {
+        store.dispatch(fetchPosts(getTop25InventoryUrl))
+            .then(()=> {
+                console.log(store.getState());
+            });
+    };
+
   render(){
     const {dispatch, data, isFetching} = this.props;
+      console.log(dispatch, data, isFetching);
     return (
         <div>
           { isFetching ?
@@ -61,11 +77,13 @@ class InventoryModule extends Component {
 }
 
 
-function select(state) {
+function mapStateIntoModuleProps(state) {
+    // state is the global store
+    var inventoryStore = state.inventoryStore;
   return {
-    data: state.items,
-    isFetching: state.isFetching
+    data: inventoryStore.items,
+    isFetching: inventoryStore.isFetching
   };
 }
 
-export default connect(select)(InventoryModule);
+export default connect(mapStateIntoModuleProps)(InventoryModule);

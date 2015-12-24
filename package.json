@@ -55,7 +55,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.1",
-    "history": "^1.13.0",
     "isomorphic-fetch": "^2.2.0",
     "jquery": "^2.1.4",
     "normalize.css": "^3.0.3",
@@ -67,7 +66,6 @@
     "react-router": "^1.0.1",
     "react-toolbox": "^0.13.3",
     "redux": "^3.0.5",
-    "redux-simple-router": "^1.0.2",
     "redux-thunk": "^1.0.2"
   }
 }
