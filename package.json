@@ -4,6 +4,7 @@
   "description": "we build cloud-bean 3.0",
   "scripts": {
     "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "deploy": "NODE_ENV=production webpack --config webpack.production.config.js",
     "test": "./node_modules/mocha/bin/mocha  --compilers js:babel-core/register --require ./test/testHelper.js 'test/**/*.@(js|jsx)'"
   },
   "repository": {

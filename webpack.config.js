@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = {
 	context: __dirname,
-	devtool: 'inline-source-map',
+	//devtool: 'inline-source-map',
 	entry: [
 		'webpack-dev-server/client?http://localhost:8080',
 		'webpack/hot/only-dev-server',
@@ -15,7 +15,7 @@ module.exports = {
 		loaders: [
 			{
 				test: /\.jsx?$/,
-				exclude: /node_modules/,
+				include: /src/,
 				loader: 'react-hot!babel'
 			},
 			{
@@ -24,7 +24,7 @@ module.exports = {
 			},
 			{
 				test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-				loader: 'url-loader?limit=100000'
+				loader: 'url-loader?limit=81920'
 			}
 		]
 	},
@@ -39,10 +39,12 @@ module.exports = {
 	},
 	devServer: {
 		contentBase: './dist',
-		hot: true
+		hot: false
 	},
 	plugins: [
 		new ExtractTextPlugin('bundle.css', { allChunks: true }),
-		new webpack.HotModuleReplacementPlugin()
+		new webpack.HotModuleReplacementPlugin(),
+        new webpack.optimize.UglifyJsPlugin({minimize: true}),
+        new webpack.optimize.CommonsChunkPlugin('common.js')
 	]
 };
