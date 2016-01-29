@@ -2,7 +2,7 @@ import React from 'react';
 import WeUI from 'react-weui';
 
 
-const {Button} = WeUI;
+const {Button,ButtonArea} = WeUI;
 export default class SearchBar extends React.Component {
 	render(){
 		return (
@@ -13,8 +13,10 @@ export default class SearchBar extends React.Component {
                     <input className="weui_input" type="tel" placeholder="请输入云豆编号"/>
                 </div>
             </div>
+						<ButtonArea>
             <Button plain="true">扫描</Button>
             <Button plain="true">添加</Button>
+						</ButtonArea>
       </div>
 		)
 	}

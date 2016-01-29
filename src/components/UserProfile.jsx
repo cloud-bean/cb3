@@ -1,9 +1,9 @@
 import React from 'react';
 import WeUI from 'react-weui';
-
+import { connect} from 'react-redux';
 const {Cells, CellsTitle, CellsTips, Cell, CellHeader, CellBody, CellFooter} = WeUI;
 
-export default class UserProfile extends React.Component {
+export class UserProfile extends React.Component {
 	render(){
 		return (
         <section>
@@ -11,7 +11,7 @@ export default class UserProfile extends React.Component {
                 <Cells access>
                     <Cell className="list_item">
                         <CellBody>
-                            <h2 className="title">辛那克斯（已借3/4）</h2>
+                            <h2 className="title">{this.props.userName}（已借3/4）</h2>
                             <p className="desc">15349216763</p>
                         </CellBody>
                     </Cell>
@@ -20,3 +20,10 @@ export default class UserProfile extends React.Component {
 		)
 	}
 }
+function select(state) {
+  return {
+    userName: state.user,
+  };
+}
+
+export default connect(select)(UserProfile);

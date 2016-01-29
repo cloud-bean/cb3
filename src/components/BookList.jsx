@@ -1,19 +1,36 @@
 import React from 'react';
 import WeUI from 'react-weui';
 import BookItem from './BookItem';
+import * as service from '../ajaxService/service'
 
 const {Cells, CellsTitle, CellsTips, Cell, CellHeader, CellBody, CellFooter} = WeUI;
 
-export default class UserProfile extends React.Component {
+export default class BookList extends React.Component {
+	constructor(props){
+		super(props);
+		this.state={books:[]};
+	}
+	// componentDidMount(){
+	// 	service.getRentedBookOfMember('5513a00900445c417e01d805').then((value)=>{
+	// 		this.setState({
+	// 			books:value
+	// 		})
+	// 	},(err)=>{
+	// 		console.log('err');
+	// 	});
+	// }
 	render(){
-		return (
+		let books = this.state.books.map((book)=>{
+			if(book.status==='R'){
+				return (<BookItem bookName={book._id}></BookItem>)
+			}
+		})
+			return (
         <section>
           <CellsTitle>书籍列表</CellsTitle>
                <Cells>
-                  <BookItem></BookItem>
-                  <BookItem></BookItem>
-                  <BookItem></BookItem>
-                </Cells>
+							 {books}
+              </Cells>
         </section>
 		)
 	}

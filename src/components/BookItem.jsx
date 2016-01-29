@@ -5,11 +5,12 @@ const {Cells, CellsTitle, CellsTips, Cell, CellHeader, CellBody, CellFooter,Icon
 
 export default class BookItem extends React.Component {
 	render(){
+		console.log(this.props.bookName);
 		return (
-      <div>      
+      <div>
         <div className="weui_cells weui_cells_form">
           <div className="weui_cell weui_cell_switch">
-            <div className="weui_cell_hd weui_cell_primary">月亮的故事</div>
+            <div className="weui_cell_hd weui_cell_primary">{this.props.bookName}</div>
             <div className="weui_cell_ft">
               <input className="weui_switch" type="checkbox"/>
             </div>

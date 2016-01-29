@@ -4,7 +4,7 @@ import BookList from './BookList';
 import BookItem from './BookItem';
 import WeUI from 'react-weui';
 
-const {Button} = WeUI;
+const {Button,ButtonArea} = WeUI;
 
 
 
@@ -14,7 +14,9 @@ export default class Return extends React.Component {
 			<div>
 			<UserProfile></UserProfile>
 			<BookList></BookList>
+		<ButtonArea>
 			<Button>归还图书</Button>
+		</ButtonArea>
 			</div>
 		)
 	}

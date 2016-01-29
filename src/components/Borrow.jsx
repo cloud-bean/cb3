@@ -5,7 +5,7 @@ import BookItem from './BookItem';
 import SearchBar from './SearchBar';
 import WeUI from 'react-weui';
 
-const {Button} = WeUI;
+const {Button,ButtonArea} = WeUI;
 
 
 
@@ -16,7 +16,9 @@ export default class Return extends React.Component {
 			<UserProfile></UserProfile>
 			<SearchBar></SearchBar>
 			<BookList></BookList>
+		<ButtonArea>
 			<Button>确认借阅</Button>
+		</ButtonArea>
 			</div>
 		)
 	}

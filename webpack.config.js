@@ -18,10 +18,6 @@ module.exports = {
 				exclude: /node_modules/,
 				loader: 'react-hot!babel'
 			},
-			// {
-			// 	test: /\.less$/,
-			// 	loader: 'style!less'
-			// },
 			{
 				test: /(\.scss|\.css)$/,
 				loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass?sourceMap')
