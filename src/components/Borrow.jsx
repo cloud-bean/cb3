@@ -13,7 +13,7 @@ export default class Return extends React.Component {
 	render(){
 		return (
 			<div>
-			<UserProfile></UserProfile>
+			<UserProfile userName='辛那克斯'></UserProfile>
 			<SearchBar></SearchBar>
 			<BookList></BookList>
 		<ButtonArea>

@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = {
 	context: __dirname,
-	//devtool: 'inline-source-map',
+	devtool: 'inline-source-map',
 	entry: [
 		'webpack-dev-server/client?http://localhost:8080',
 		'webpack/hot/only-dev-server',
@@ -15,7 +15,7 @@ module.exports = {
 		loaders: [
 			{
 				test: /\.jsx?$/,
-				include: /src/,
+				exclude: /node_modules/,
 				loader: 'react-hot!babel'
 			},
 			{
@@ -38,8 +38,8 @@ module.exports = {
 		filename: 'bundle.js'
 	},
 	devServer: {
-		contentBase: './',
-		hot: true
+		contentBase: './dist',
+		hot:true
 	},
 	plugins: [
 		new ExtractTextPlugin('bundle.css', { allChunks: true }),

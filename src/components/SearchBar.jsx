@@ -8,7 +8,7 @@ export default class SearchBar extends React.Component {
 		return (
       <div className="weui_cells weui_cells_form">
             <div className="weui_cell">
-                <div className="weui_cell_hd"><label class="weui_label">云豆编号</label></div>
+                <div className="weui_cell_hd"><label >云豆编号</label></div>
                 <div className="weui_cell_bd weui_cell_primary">
                     <input className="weui_input" type="tel" placeholder="请输入云豆编号"/>
                 </div>
