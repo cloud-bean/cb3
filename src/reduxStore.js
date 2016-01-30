@@ -7,6 +7,6 @@ const createStoreWithMiddleware = applyMiddleware(
 )(createStore);
 
 const store = createStoreWithMiddleware(appReducers);
-console.log(store.getState());
+
 
 export default store;

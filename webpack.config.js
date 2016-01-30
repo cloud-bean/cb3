@@ -38,13 +38,13 @@ module.exports = {
 		filename: 'bundle.js'
 	},
 	devServer: {
-		contentBase: './dist',
-		hot: false
+		contentBase: './',
+		hot: true
 	},
 	plugins: [
 		new ExtractTextPlugin('bundle.css', { allChunks: true }),
 		new webpack.HotModuleReplacementPlugin(),
-        new webpack.optimize.UglifyJsPlugin({minimize: true}),
-        new webpack.optimize.CommonsChunkPlugin('common.js')
+  //  new webpack.optimize.UglifyJsPlugin({minimize: true}),
+  //  new webpack.optimize.CommonsChunkPlugin('common.js')
 	]
 };
