@@ -2,16 +2,19 @@ import React from 'react';
 import {Link} from 'react-router';
 import WeUI from 'react-weui';
 import store from '../reduxStore';
-import {fetchMember} from '../actions/userAction'
-const {Button,ButtonArea} = WeUI;
+import {fetchUser} from '../actions/userAction'
+import {connect} from 'react-redux';
+
+const {Button,ButtonArea,Toast} = WeUI;
 
 
-export default class Signup extends React.Component {
-handleClick(e){
-	let phone = React.findDOMNode(this.refs.phone).value.trim();
-	store.dispatch(fetchMember(phone));
-}
-render(){
+class Signup extends React.Component {
+	constructor(){
+		super();
+
+	}
+
+	render(){
 		return (
 			<div className='container'>
 			<div className="page">
@@ -23,7 +26,7 @@ render(){
             <div className="weui_cell">
                 <div className="weui_cell_hd"><label className="weui_label">手机号</label></div>
 							<div className="weui_cell_bd weui_cell_primary">
-                    <input className="weui_input" type="tel" placeholder="请输入手机号" ref="phone"/>
+                    <input ref="phone" className="weui_input" type="tel" placeholder="请输入手机号" />
                 </div>
             </div>
         </div>
@@ -36,4 +39,16 @@ render(){
 			</div>
 		)
 	}
+
+	handleClick(e){
+		const phone = React.findDOMNode(this.refs.phone).value.trim();
+		this.props.dispatch(fetchUser(phone));
+	}
 }
+
+function mapStateIntoModuleProps(state) {
+  return {
+  };
+}
+
+export default connect(mapStateIntoModuleProps)(Signup);

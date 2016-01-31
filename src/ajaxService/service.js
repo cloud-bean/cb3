@@ -35,7 +35,7 @@ export function getMembyPhone(phone){
     $.getJSON(url,(data,status)=>{
       if(status === 'success'){
         console.log(data);
-        resovle(data);
+        resovle(data.member);
       }
     });
   })

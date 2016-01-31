@@ -3,7 +3,7 @@ import WeUI from 'react-weui';
 import { connect} from 'react-redux';
 const {Cells, CellsTitle, CellsTips, Cell, CellHeader, CellBody, CellFooter} = WeUI;
 
-export class UserProfile extends React.Component {
+export default class UserProfile extends React.Component {
 	render(){
 		return (
         <section>
@@ -20,10 +20,3 @@ export class UserProfile extends React.Component {
 		)
 	}
 }
-function select(state) {
-  return {
-    userName: state.user,
-  };
-}
-
-export default connect(select)(UserProfile);

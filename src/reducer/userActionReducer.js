@@ -1,18 +1,27 @@
-import { LOGIN } from '../actions/actionNames';
+import { USER_REQUEST,USER_SUCCESS,USER_FAILURE } from '../actions/userAction';
+
 
 const defaultState = {
   user:{},
   loading: false,
 };
 
-
-
-
-export default function loginReducer(state=defaultState, action) {
+export default function userReducer(state=defaultState, action) {
   switch (action.type) {
-    case LOGIN:
+    case USER_REQUEST:
       return Object.assign({}, state, {
-        isFetching: true
+        loading: true
+      });
+    case USER_SUCCESS:
+      return Object.assign({}, state, {
+        loading: false,
+        status:'success',
+        user:action.user,
+      });
+    case USER_FAILURE:
+      return Object.assign({}, state, {
+        loading: false,
+        status:action.err,
       });
     default:
       return state;
