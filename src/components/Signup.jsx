@@ -11,39 +11,48 @@ const {Button,ButtonArea,Toast} = WeUI;
 class Signup extends React.Component {
 	constructor(){
 		super();
-
+        this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
 	}
+
+    handleChange(e){
+        console.log(e.target.value);
+        this.setState({phone: e.target.value}, function (err){
+        });
+    }
+
+    handleClick() {
+        console.log('this.refs.phone.value: ', this.refs.phone.value);
+        console.log('this.state.phone: ', this.state.phone);
+    }
 
 	render(){
 		return (
 			<div className='container'>
-			<div className="page">
-
-    		<div className="bd">
-
-        <div className="weui_cells_title">用户登录</div>
-			<div className="weui_cells weui_cells_form">
-            <div className="weui_cell">
-                <div className="weui_cell_hd"><label className="weui_label">手机号</label></div>
-							<div className="weui_cell_bd weui_cell_primary">
-                    <input ref="phone" className="weui_input" type="tel" placeholder="请输入手机号" />
+                <div className="page">
+                    <div className="bd">
+                        <div className="weui_cells_title">用户登录</div>
+                            <div className="weui_cells weui_cells_form">
+                            <div className="weui_cell">
+                                <div className="weui_cell_hd"><label className="weui_label">手机号</label></div>
+                                            <div className="weui_cell_bd weui_cell_primary">
+                                    <input ref="phone" className="weui_input" onChange={this.handleChange} type="tel" placeholder="请输入手机号" />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="weui_cells_tips">请输入您注册会员时的手机号</div>
+                            <div className="weui_btn_area">
+                                <Button onClick={this.handleClick}>确定</Button>
+                                <br/>
+                            <Link to="/main"><Button>Go BACK</Button></Link>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div className="weui_cells_tips">请输入您注册会员时的手机号</div>
-			<div className="weui_btn_area">
-            <Link to="/main"><Button onClick={this.handleClick}>确定</Button></Link>
-        </div>
-        </div>
-			</div>
 			</div>
 		)
 	}
 
-	handleClick(e){
-		const phone = React.findDOMNode(this.refs.phone).value.trim();
-		this.props.dispatch(fetchUser(phone));
-	}
+
 }
 
 function mapStateIntoModuleProps(state) {
