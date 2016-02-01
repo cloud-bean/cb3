@@ -8,5 +8,4 @@ const createStoreWithMiddleware = applyMiddleware(
 
 const store = createStoreWithMiddleware(appReducers);
 
-
 export default store;

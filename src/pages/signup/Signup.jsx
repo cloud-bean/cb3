@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 import WeUI from 'react-weui';
-import store from '../reduxStore';
-import {fetchUser} from '../actions/userAction'
+import store from '../../reduxStore';
+import {fetchUser} from '../../actions/userAction'
 import {connect} from 'react-redux';
 
 const {Button,ButtonArea,Toast} = WeUI;
@@ -16,15 +16,12 @@ class Signup extends React.Component {
 	}
 
     handleChange(e){
-        console.log(e.target.value);
         this.setState({phone: e.target.value}, function (err){
         });
     }
 
     handleClick() {
-        // console.log('this.refs.phone.value: ', this.refs.phone.value);
-        // console.log('this.state.phone: ', this.state.phone);
-				this.props.dispatch(fetchUser(this.state.phone));
+        this.props.dispatch(fetchUser(this.state.phone));
     }
 
 	render(){
