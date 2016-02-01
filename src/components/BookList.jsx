@@ -6,7 +6,6 @@ const {Cells, CellsTitle, CellsTips, Cell, CellHeader, CellBody, CellFooter} = W
 export default class BookList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {books: []};
     }
 
     // componentDidMount(){
@@ -19,10 +18,8 @@ export default class BookList extends React.Component {
     // 	});
     // }
     render() {
-        let books = this.state.books.map((book)=> {
-            if (book.status === 'R') {
-                return (<BookItem bookName={book._id}></BookItem>)
-            }
+        let books = this.props.books.map((book)=> {
+                return (<BookItem bookName={book.name}></BookItem>)
         });
         return (
             <section>

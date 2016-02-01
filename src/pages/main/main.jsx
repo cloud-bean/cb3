@@ -2,7 +2,8 @@ import React from 'react';
 import {Link} from 'react-router';
 import WeUI from 'react-weui';
 import UserProfile from './../../components/userProfile/UserProfile';
-import * as service from '../../ajaxService/service'
+import {fetchInventory} from '../../actions/inventoryAction';
+import * as service from '../../ajaxService/service';
 import {connect} from 'react-redux';
 import 'weui';
 const {Button, Toast} = WeUI;
@@ -11,6 +12,10 @@ import './Main.scss';
 export class Main extends React.Component {
     constructor() {
         super();
+    }
+
+    handleClick() {
+        this.props.dispatch(fetchInventory(this.props.user._id));
     }
 
     render() {
@@ -26,8 +31,8 @@ export class Main extends React.Component {
                     <div>
                         <UserProfile user={user}></UserProfile>
                         <div className="button" spacing>
-                            <Link to="/borrow"><Button>借书</Button></Link>
-                            <Link to="/return"><Button type='warn' style={{marginTop:'10px'}}>还书</Button></Link>
+                            <Link to="/borrow"><Button >借书</Button></Link>
+                            <Link to="/return"><Button type='warn' style={{marginTop:'10px'}} onClick={e=>this.handleClick(e)}>还书</Button></Link>
                         </div>
                     </div>
                 }
