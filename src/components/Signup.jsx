@@ -22,8 +22,9 @@ class Signup extends React.Component {
     }
 
     handleClick() {
-        console.log('this.refs.phone.value: ', this.refs.phone.value);
-        console.log('this.state.phone: ', this.state.phone);
+        // console.log('this.refs.phone.value: ', this.refs.phone.value);
+        // console.log('this.state.phone: ', this.state.phone);
+				this.props.dispatch(fetchUser(this.state.phone));
     }
 
 	render(){
@@ -42,9 +43,7 @@ class Signup extends React.Component {
                         </div>
                         <div className="weui_cells_tips">请输入您注册会员时的手机号</div>
                             <div className="weui_btn_area">
-                                <Button onClick={this.handleClick}>确定</Button>
-                                <br/>
-                            <Link to="/main"><Button>Go BACK</Button></Link>
+                              <Link to="/main">  <Button onClick={this.handleClick}>确定</Button></Link>
                         </div>
                     </div>
                 </div>

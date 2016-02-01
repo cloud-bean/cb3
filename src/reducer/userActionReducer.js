@@ -13,6 +13,7 @@ export default function userReducer(state=defaultState, action) {
         loading: true
       });
     case USER_SUCCESS:
+    console.log(action.user);
       return Object.assign({}, state, {
         loading: false,
         status:'success',

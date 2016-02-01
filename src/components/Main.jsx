@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 
 import 'weui';
 
-const {Button,ButtonArea,Page} = WeUI;
+const {Button,ButtonArea,Page,Toast} = WeUI;
 
 
 
@@ -26,6 +26,7 @@ export  class Main extends React.Component{
 	// };
 	render() {
 		const {dispatch, user, loading} = this.props;
+		console.log(user);
 		return (
 <div>
 		<UserProfile userName={user.baby_name}></UserProfile>
@@ -42,9 +43,10 @@ export  class Main extends React.Component{
 };
 
 function mapStateIntoModuleProps(state) {
-  return {
-    user: state.user,
-    loading: state.loading
+		const userStore = state.userStore;
+   	return {
+    user: userStore.user,
+    loading: userStore.loading
   };
 }
 
