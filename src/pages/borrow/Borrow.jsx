@@ -5,26 +5,32 @@ import BookItem from './../../components/BookItem';
 import SearchBar from './../../components/SearchBar';
 import WeUI from 'react-weui';
 import {connect} from 'react-redux';
-const {Button,ButtonArea} = WeUI;
-export default class Return extends React.Component {
+const {Button,ButtonArea,Toast} = WeUI;
+export  class Borrow extends React.Component {
+    handleClick(e){
+    }
     render() {
+        const {loading,wantToRent} = this.props;
         return (
             <div>
-              <UserProfile user={this.props.user}></UserProfile>
+              <UserProfile></UserProfile>
               <SearchBar></SearchBar>
-              <BookList></BookList>
+                <Toast icon="loading" show={loading}>
+                    正在加载中...
+                </Toast>
+              <BookList books={wantToRent}></BookList>
                 <ButtonArea>
-                    <Button>确认借阅</Button>
+                    <Button onClick={e=>this.handleClick(e)}>确认借阅</Button>
                 </ButtonArea>
             </div>
         )
     }
 }
 function mapStateIntoModuleProps(state) {
-    const userStore = state.userStore;
+    const inventoryStore = state.inventoryStore;
     return {
-        user: userStore.user,
-        loading: userStore.loading
+        loading: inventoryStore.loading,
+        wantToRent:inventoryStore.wantToRent,
     };
 }
-export default connect(mapStateIntoModuleProps)(Return);
+export default connect(mapStateIntoModuleProps)(Borrow);

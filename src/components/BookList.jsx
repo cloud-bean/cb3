@@ -18,14 +18,18 @@ export default class BookList extends React.Component {
     // 	});
     // }
     render() {
-        let books = this.props.books.map((book)=> {
+      let books = [];
+      if(this.props.books){
+        books = this.props.books.map((book)=> {
                 return (<BookItem bookName={book.name}></BookItem>)
         });
+      }
+
         return (
             <section>
                 <CellsTitle>书籍列表</CellsTitle>
                 <Cells>
-                    {books}
+                  {books}
                 </Cells>
             </section>
         )

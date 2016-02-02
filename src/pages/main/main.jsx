@@ -19,7 +19,7 @@ export class Main extends React.Component {
     }
 
     render() {
-        const {dispatch, user, loading,rentCount} = this.props;
+        const {dispatch,loading,user} = this.props;
         return (
             <div>
                 { loading ?
@@ -28,7 +28,7 @@ export class Main extends React.Component {
                     </Toast>
                     :
                     <div>
-                        <UserProfile user={user} rentCount={rentCount}></UserProfile>
+                        <UserProfile></UserProfile>
                         <div className="button" spacing>
                             <Link to="/borrow"><Button >借书</Button></Link>
                             <Link to="/return"><Button type='warn' style={{marginTop:'10px'}} onClick={e=>this.handleClick(e)}>还书</Button></Link>
@@ -41,11 +41,9 @@ export class Main extends React.Component {
 }
 function mapStateIntoModuleProps(state) {
     const userStore = state.userStore;
-    const inventoryStore = state.inventoryStore;
     return {
-        user: userStore.user,
+        user:userStore.user,
         loading: userStore.loading,
-        rentCount:userStore.rentCount,
     };
 }
 export default connect(mapStateIntoModuleProps)(Main);

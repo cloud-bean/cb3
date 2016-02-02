@@ -89,3 +89,44 @@ export function fetchRecords(memberid) {
         });
     }
 }
+
+export const BOOK_REQUEST = 'BOOK_REQUEST';
+export const BOOK_SUCCESS = 'BOOK_SUCCESS';
+export const BOOK_FAILURE = 'BOOK_FAILURE';
+
+export function BookRequest() {
+    return {
+        type: BOOK_REQUEST
+    }
+}
+export function BookSuccess(book) {
+    return {
+        type: BOOK_SUCCESS,
+        book: book
+    }
+}
+export function BookFailure(err) {
+    return {
+        type: BOOK_FAILURE,
+        status: err
+    }
+}
+export function fetchBook(bookid) {
+    // Thunk middleware 知道如何处理函数。
+    // 这里把 dispatch 方法通过参数的形式传给函数，
+    // 以此来让它自己也能 dispatch action。
+    return function (dispatch) {
+        // 首次 dispatch：更新应用的 state 来通知
+        // API 请求发起了。
+        dispatch(BookRequest());
+        // thunk middleware 调用的函数可以有返回值，
+        // 它会被当作 dispatch 方法的返回值传递。
+        // 这个案例中，我们返回一个等待处理的 promise。
+        // 这并不是 redux middleware 所必须的，但这对于我们而言很方便。
+        return service.getBookbyId(bookid).then((value)=> {
+            dispatch(BookSuccess(value));
+        }, (err)=> {
+            BookFailure(err);
+        });
+    }
+}
