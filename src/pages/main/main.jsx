@@ -24,7 +24,7 @@ export class Main extends React.Component {
         return (
             <div>
                 { loading ?
-                    <Toast icon="loading">
+                    <Toast icon="loading" show="true">
                         正在加载中...
                     </Toast>
                     :

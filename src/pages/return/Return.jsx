@@ -5,27 +5,23 @@ import BookItem from './../../components/BookItem';
 import {connect} from 'react-redux';
 import WeUI from 'react-weui';
 
-const {Button,ButtonArea} = WeUI;
+const {Button,ButtonArea,Toast} = WeUI;
 
 export  class Return extends React.Component {
     render() {
-        const {user,loading,rentList,dispatch} = this.props;
-        let books = [];
-        rentList.map((records)=>{
-          if(records.status==='R'){
-            books.push(records.inventory)
-          }
-        })
+        const {user,loading,unReturnBooks,dispatch} = this.props;
+
+
         return (
             <div>
               { loading ?
-                  <Toast icon="loading">
+                  <Toast icon="loading" show={true}>
                       正在加载中...
                   </Toast>
                   :
-                <div>
+                  <div>
                 <UserProfile user={user}></UserProfile>
-                <BookList books={books}> </BookList>
+                <BookList books={unReturnBooks}> </BookList>
                 <ButtonArea>
                     <Button>归还图书</Button>
                 </ButtonArea>
@@ -41,8 +37,8 @@ function mapStateIntoModuleProps(state) {
     const inventoryStore = state.inventoryStore;
     return {
         user: userStore.user,
-        loading: userStore.loading,
-        rentList:inventoryStore.rentList,
+        loading: inventoryStore.loading,
+        unReturnBooks:inventoryStore.unReturnBooks,
     };
 }
 export default connect(mapStateIntoModuleProps)(Return);

@@ -25,10 +25,21 @@ export default function postsReducer(state=defaultState, action) {
         loading: true
       });
     case INVENTORY_SUCCESS:
+      // console.log(action.rentRecords);
+      let rentRecords = action.rentRecords;
+      let unReturnBooks = [];
+      rentRecords.map((records)=>{
+        if(records.status==='R'){
+          unReturnBooks.push(records.inventory)
+        }
+      })
+      const rentCount = unReturnBooks.length;
       return Object.assign({}, state, {
         loading: false,
         status: 'success',
-        rentList: action.rentList,
+        rentCount:rentCount,
+        rentRecords: action.rentRecords,
+        unReturnBooks:unReturnBooks
       });
     case INVENTORY_FAILURE:
       return Object.assign({}, state, {

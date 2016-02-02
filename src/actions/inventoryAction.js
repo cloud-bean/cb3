@@ -61,7 +61,7 @@ export function InventoryRequest() {
 export function InventorySuccess(records) {
     return {
         type: INVENTORY_SUCCESS,
-        rentList: records
+        rentRecords: records
     }
 }
 export function InventoryFailure(err) {
