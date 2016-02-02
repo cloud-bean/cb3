@@ -17,7 +17,8 @@ export default function userReducer(state=defaultState, action) {
       return Object.assign({}, state, {
         loading: false,
         status:'success',
-        user:action.user,
+        user:action.user.member,
+        rentCount:action.user.rentCount,
       });
     case USER_FAILURE:
       return Object.assign({}, state, {

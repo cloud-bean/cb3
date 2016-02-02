@@ -49,43 +49,43 @@ export function fetchPosts(url) {
   }
 }
 
-export const INVENTORY_REQUEST = 'INVENTORY_REQUEST';
-export const INVENTORY_SUCCESS = 'INVENTORY_SUCCESS';
-export const INVENTORY_FAILURE = 'INVENTORY_FAILURE';
+export const RECORDS_REQUEST = 'RECORDS_REQUEST';
+export const RECORDS_SUCCESS = 'RECORDS_SUCCESS';
+export const RECORDS_FAILURE = 'RECORDS_FAILURE';
 
-export function InventoryRequest() {
+export function RecordsRequest() {
     return {
-        type: INVENTORY_REQUEST
+        type: RECORDS_REQUEST
     }
 }
-export function InventorySuccess(records) {
+export function RecordsSuccess(records) {
     return {
-        type: INVENTORY_SUCCESS,
+        type: RECORDS_SUCCESS,
         rentRecords: records
     }
 }
-export function InventoryFailure(err) {
+export function RecordsFailure(err) {
     return {
-        type: INVENTORY_FAILURE,
+        type: RECORDS_FAILURE,
         status: err
     }
 }
-export function fetchInventory(memberid) {
+export function fetchRecords(memberid) {
     // Thunk middleware 知道如何处理函数。
     // 这里把 dispatch 方法通过参数的形式传给函数，
     // 以此来让它自己也能 dispatch action。
     return function (dispatch) {
         // 首次 dispatch：更新应用的 state 来通知
         // API 请求发起了。
-        dispatch(InventoryRequest());
+        dispatch(RecordsRequest());
         // thunk middleware 调用的函数可以有返回值，
         // 它会被当作 dispatch 方法的返回值传递。
         // 这个案例中，我们返回一个等待处理的 promise。
         // 这并不是 redux middleware 所必须的，但这对于我们而言很方便。
         return service.getRentedBookOfMember(memberid).then((value)=> {
-            dispatch(InventorySuccess(value));
+            dispatch(RecordsSuccess(value));
         }, (err)=> {
-            InventoryFailure(err);
+            RecordsFailure(err);
         });
     }
 }

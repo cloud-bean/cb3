@@ -21,7 +21,14 @@ class Signup extends React.Component {
     }
 
     handleClick() {
-        this.props.dispatch(fetchUser(this.state.phone));
+			const dispatch = this.props.dispatch;
+        dispatch(fetchUser(this.state.phone));
+				// .then(()=>{
+				// 	  // dispatch(fetchRecords(store.getState().userStore.user._id)).then(()=>{
+				// 		// 		console.log(store.getState());
+				// 		// });
+				//
+				// });
     }
 
 	render(){

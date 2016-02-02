@@ -9,9 +9,9 @@ const {Button,ButtonArea,Toast} = WeUI;
 
 export  class Return extends React.Component {
     render() {
-        const {user,loading,unReturnBooks,dispatch} = this.props;
+        const {user,loading,unReturnBooks,dispatch,rentCount} = this.props;
 
-
+        console.log(unReturnBooks);
         return (
             <div>
               { loading ?
@@ -20,7 +20,7 @@ export  class Return extends React.Component {
                   </Toast>
                   :
                   <div>
-                <UserProfile user={user}></UserProfile>
+                <UserProfile user={user} rentCount={rentCount}></UserProfile>
                 <BookList books={unReturnBooks}> </BookList>
                 <ButtonArea>
                     <Button>归还图书</Button>
@@ -38,6 +38,7 @@ function mapStateIntoModuleProps(state) {
     return {
         user: userStore.user,
         loading: inventoryStore.loading,
+        rentCount:userStore.rentCount,
         unReturnBooks:inventoryStore.unReturnBooks,
     };
 }

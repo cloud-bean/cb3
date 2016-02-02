@@ -1,5 +1,5 @@
 import { REQUEST_POSTS, RECEIVE_POSTS } from '../actions/actionNames';
-import {INVENTORY_REQUEST,INVENTORY_SUCCESS,INVENTORY_FAILURE} from '../actions/inventoryAction'
+import {RECORDS_REQUEST,RECORDS_SUCCESS,RECORDS_FAILURE} from '../actions/inventoryAction'
 
 const defaultState = {
   isFetching: false,
@@ -20,12 +20,12 @@ export default function postsReducer(state=defaultState, action) {
         isFetching: false,
         items: action.items,
       });
-    case INVENTORY_REQUEST:
+    case RECORDS_REQUEST:
       return Object.assign({}, state, {
         loading: true
       });
-    case INVENTORY_SUCCESS:
-      // console.log(action.rentRecords);
+    case RECORDS_SUCCESS:
+      console.log('records',action.rentRecords);
       let rentRecords = action.rentRecords;
       let unReturnBooks = [];
       rentRecords.map((records)=>{
@@ -33,15 +33,14 @@ export default function postsReducer(state=defaultState, action) {
           unReturnBooks.push(records.inventory)
         }
       })
-      const rentCount = unReturnBooks.length;
+    //  const rentCount = unReturnBooks.length;
       return Object.assign({}, state, {
         loading: false,
         status: 'success',
-        rentCount:rentCount,
         rentRecords: action.rentRecords,
         unReturnBooks:unReturnBooks
       });
-    case INVENTORY_FAILURE:
+    case RECORDS_FAILURE:
       return Object.assign({}, state, {
         loading: false,
         status: action.err,

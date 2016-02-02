@@ -34,8 +34,7 @@ export function getMembyPhone(phone){
     let url = GENERAL_CONFIG.baseUrl + '/members/mob/phone/' + phone;
     $.getJSON(url,(data,status)=>{
       if(status === 'success'){
-        console.log(data);
-        resovle(data.member);
+        resovle(data);
       }
     });
   })

@@ -10,7 +10,7 @@ export default class BookItem extends React.Component {
                     <div className="weui_cell weui_cell_switch">
                         <div className="weui_cell_hd weui_cell_primary">{this.props.bookName}</div>
                         <div className="weui_cell_ft">
-                            <input className="weui_switch" type="checkbox" value='true'/>
+                            <input className="weui_switch" type="checkbox" defaultChecked/>
                         </div>
                     </div>
                 </div>
