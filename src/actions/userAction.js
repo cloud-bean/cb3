@@ -35,7 +35,7 @@ export function fetchUser(phone) {
         return service.getMembyPhone(phone).then((value)=> {
             dispatch(userSuccess(value));
         }, (err)=> {
-            userFailure(err);
+            dispatch(userFailure(err));
         });
     }
 }

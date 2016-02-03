@@ -5,7 +5,8 @@ import store from '../../reduxStore';
 import {fetchUser} from '../../actions/userAction'
 import {connect} from 'react-redux';
 
-const {Button,ButtonArea,Toast} = WeUI;
+const {Button,ButtonArea,Toast,Dialog} = WeUI;
+const {Alert} = Dialog;
 
 
 class Signup extends React.Component {
@@ -33,6 +34,7 @@ class Signup extends React.Component {
 
 	render(){
 		return (
+
 			<div className='container'>
                 <div className="page">
                     <div className="bd">
@@ -51,6 +53,7 @@ class Signup extends React.Component {
                         </div>
                     </div>
                 </div>
+								
 			</div>
 		)
 	}

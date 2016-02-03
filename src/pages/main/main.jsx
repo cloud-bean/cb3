@@ -6,14 +6,13 @@ import {fetchRecords} from '../../actions/inventoryAction';
 import * as service from '../../ajaxService/service';
 import {connect} from 'react-redux';
 import 'weui';
-const {Button, Toast} = WeUI;
+const {Button, Toast,Alert} = WeUI;
 import './Main.scss';
 
 export class Main extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
-
     handleClick() {
         // this.props.dispatch(fetchRecords(this.props.user._id));
     }

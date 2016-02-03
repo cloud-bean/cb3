@@ -1,10 +1,10 @@
 
 import {GET_RECORDS_REQUEST,GET_RECORDS_SUCCESS,GET_RECORDS_FAILURE} from '../actions/inventoryAction';
-import {ADD_WANTEDBOOK_REQUEST,ADD_WANTEDBOOK_SUCCESS,ADD_WANTEDBOOK_FAILURE,SELECT_BOOK} from '../actions/inventoryAction'
+import {ADD_WANTEDBOOK_REQUEST,ADD_WANTEDBOOK_SUCCESS,ADD_WANTEDBOOK_FAILURE,SELECT_BOOK,RESET_STATUS} from '../actions/inventoryAction'
 
 const initialState = {
   loading:false,
-  status:'',
+  status:'success',
   unReturnBooks:[],
   wantedBooks:[],
 };
@@ -33,7 +33,7 @@ export default function inventoryReducer(state=initialState, action) {
     case GET_RECORDS_FAILURE:
       return Object.assign({}, state, {
         loading: false,
-        status: action.err,
+        status: action.status,
       });
 
 
@@ -52,7 +52,7 @@ export default function inventoryReducer(state=initialState, action) {
     case ADD_WANTEDBOOK_FAILURE:
       return Object.assign({}, state, {
         loading: false,
-        status: action.err,
+        status: action.status,
       });
 
     case SELECT_BOOK:{
@@ -79,7 +79,10 @@ export default function inventoryReducer(state=initialState, action) {
         });
       }
     }
-
+    case RESET_STATUS:
+      return Object.assign({}, state, {
+        status: 'success',
+      });
     default:
       return state;
   }

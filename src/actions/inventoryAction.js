@@ -90,7 +90,7 @@ export function getRecords(memberid) {
         return service.getRentedBookOfMember(memberid).then((value)=> {
             dispatch(getRecordsSuccess(value));
         }, (err)=> {
-            getRecordsFailure(err);
+            dispatch(getRecordsFailure(err));
         });
     }
 }
@@ -125,10 +125,14 @@ export function addWantedBookFailure(err) {
 export function addWantedBook(bookid) {
     return function (dispatch) {
         dispatch(addWantedBookRequest());
-        return service.getBookbyId(bookid).then((value)=> {
-            dispatch(addWantedBookSuccess(value));
+        return service.getBookbyId(bookid).then((book)=> {
+          if(book.isRent==='false'){
+            dispatch(addWantedBookSuccess(book));
+          }else{
+            dispatch(addWantedBookFailure('所选图书已借出'));
+          }
         }, (err)=> {
-            addWantedBookFailure(err);
+            dispatch(addWantedBookFailure(err));
         });
     }
 }
@@ -139,6 +143,14 @@ export function selectBook(index,page){
     type:SELECT_BOOK,
     page,
     index,
+  }
+}
+
+
+export const RESET_STATUS = 'RESET_STATUS';
+export function resetStatus(){
+  return {
+    type:RESET_STATUS,
   }
 }
 // export const RETURN_BOOK_REQUEST = 'RETURN_BOOK_REQUEST';

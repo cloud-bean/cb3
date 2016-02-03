@@ -2,20 +2,48 @@ import React from 'react';
 import UserProfile from './../../components/userProfile/UserProfile';
 import BookList from './../../components/BookList';
 import AddBookBar from './../../components/AddBookBar';
-import {addWantedBook,selectBook} from '../../actions/inventoryAction';
+import {addWantedBook,selectBook,resetStatus} from '../../actions/inventoryAction';
 import WeUI from 'react-weui';
 import {connect} from 'react-redux';
 
-const {Button,ButtonArea,Toast} = WeUI;
+const {Button,ButtonArea,Toast,Dialog} = WeUI;
+const {Alert} = Dialog;
 
 export  class Borrow extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+        alert: {
+            title: '出错啦',
+            buttons: [
+                {
+                    label: '好的',
+                    onClick: this.hideAlert.bind(this)
+                }
+            ]
+        }
+    };
+
+  }
+
+
+    hideAlert(){
+        this.props.dispatch(resetStatus());
+    }
+
     handleClick(e){
       //this.props.dispatch();
     }
     render() {
-        const {loading,wantedBooks,dispatch,userStore} = this.props;
+        const {loading,wantedBooks,dispatch,userStore,status} = this.props;
         return (
             <div>
+              <Alert
+                    show={!(status==='success')}
+                    title={this.state.alert.title}
+                    buttons={this.state.alert.buttons}>
+                        {status}
+              </Alert>
               <Toast icon="loading" show={loading}>
                   正在加载中...
               </Toast>
@@ -35,6 +63,7 @@ function mapStateIntoModuleProps(state) {
         userStore:state.userStore,
         loading: inventoryStore.loading,
         wantedBooks:inventoryStore.wantedBooks,
+        status:inventoryStore.status
     };
 }
 export default connect(mapStateIntoModuleProps)(Borrow);
