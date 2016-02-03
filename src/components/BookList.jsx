@@ -7,27 +7,17 @@ export default class BookList extends React.Component {
     constructor(props) {
         super(props);
     }
-
-    // componentDidMount(){
-    // 	service.getRentedBookOfMember('5513a00900445c417e01d805').then((value)=>{
-    // 		this.setState({
-    // 			books:value
-    // 		})
-    // 	},(err)=>{
-    // 		console.log('err');
-    // 	});
-    // }
     render() {
       let books = [];
       if(this.props.books){
-        books = this.props.books.map((book)=> {
-                return (<BookItem bookName={book.name}></BookItem>)
+        books = this.props.books.map((item,index)=> {
+                return (<BookItem bookName={item.book.name} key={index} checked={item.isSelected} onChange={()=>this.props.onSelect(index)}></BookItem>)
         });
       }
 
         return (
             <section>
-                <CellsTitle>书籍列表</CellsTitle>
+                <CellsTitle>{this.props.listName}</CellsTitle>
                 <Cells>
                   {books}
                 </Cells>

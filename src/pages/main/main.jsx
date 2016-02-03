@@ -15,20 +15,20 @@ export class Main extends React.Component {
     }
 
     handleClick() {
-        this.props.dispatch(fetchRecords(this.props.user._id));
+        // this.props.dispatch(fetchRecords(this.props.user._id));
     }
 
     render() {
-        const {dispatch,loading,user} = this.props;
+        const {dispatch,userStore} = this.props;
         return (
             <div>
-                { loading ?
+                { userStore.loading ?
                     <Toast icon="loading" show={true}>
                         正在加载中...
                     </Toast>
                     :
                     <div>
-                        <UserProfile></UserProfile>
+                        <UserProfile userStore={userStore}></UserProfile>
                         <div className="button" spacing>
                             <Link to="/borrow"><Button >借书</Button></Link>
                             <Link to="/return"><Button type='warn' style={{marginTop:'10px'}} onClick={e=>this.handleClick(e)}>还书</Button></Link>
@@ -42,8 +42,7 @@ export class Main extends React.Component {
 function mapStateIntoModuleProps(state) {
     const userStore = state.userStore;
     return {
-        user:userStore.user,
-        loading: userStore.loading,
+        userStore:userStore,
     };
 }
 export default connect(mapStateIntoModuleProps)(Main);

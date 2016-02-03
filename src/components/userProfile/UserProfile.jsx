@@ -6,7 +6,7 @@ import './UserProfile.scss';
 
 export default class UserProfile extends React.Component {
 	render(){
-		const {user,rentCount} = this.props;
+		const {user,rentCount} = this.props.userStore;
 		return (
         <section>
                 <CellsTitle>用户信息</CellsTitle>
@@ -24,12 +24,12 @@ export default class UserProfile extends React.Component {
 }
 
 
-function mapStateIntoModuleProps(state) {
-    const userStore = state.userStore;
-    return {
-        user: userStore.user,
-        loading: userStore.loading,
-        rentCount:userStore.rentCount,
-    };
-}
-export default connect(mapStateIntoModuleProps)(UserProfile);
+// function mapStateIntoModuleProps(state) {
+//     const userStore = state.userStore;
+//     return {
+//         user: userStore.user,
+//         loading: userStore.loading,
+//         rentCount:userStore.rentCount,
+//     };
+// }
+// export default connect(mapStateIntoModuleProps)(UserProfile);

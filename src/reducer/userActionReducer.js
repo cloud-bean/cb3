@@ -1,19 +1,20 @@
 import { USER_REQUEST,USER_SUCCESS,USER_FAILURE } from '../actions/userAction';
 
 
-const defaultState = {
+const initialState = {
   user:{},
+  status:'success',
   loading: false,
+  rentCount:0,
 };
 
-export default function userReducer(state=defaultState, action) {
+export default function userReducer(state=initialState, action) {
   switch (action.type) {
     case USER_REQUEST:
       return Object.assign({}, state, {
         loading: true
       });
     case USER_SUCCESS:
-    console.log(action.user);
       return Object.assign({}, state, {
         loading: false,
         status:'success',

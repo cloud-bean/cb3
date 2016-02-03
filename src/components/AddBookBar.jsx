@@ -2,14 +2,14 @@ import React from 'react';
 import WeUI from 'react-weui';
 import {connect} from 'react-redux';
 import {findDOMNode} from 'react-dom';
-import {fetchBook} from '../actions/inventoryAction';
+
 
 const {Button,ButtonArea} = WeUI;
-export class SearchBar extends React.Component {
+export default class AddBookBar extends React.Component {
     handleClick(e){
         const invCode = findDOMNode(this.refs.invCode).value.trim();
-        console.log(invCode);
-        this.props.dispatch(fetchBook(invCode));
+        findDOMNode(this.refs.invCode).value='';
+        this.props.onAddClick(invCode);
     }
     render() {
         return (
@@ -21,16 +21,16 @@ export class SearchBar extends React.Component {
                     </div>
                 </div>
                 <ButtonArea>
-                    <Button plain="true">扫描</Button>
-                    <Button plain="true" onClick={e=>this.handleClick(e)}>添加</Button>
+                    {/*<Button plain="true">扫描</Button>*/}
+                    <Button plain="true" onClick={e=>this.handleClick(e)}>添加至预借阅列表</Button>
                 </ButtonArea>
             </div>
         )
     }
 }
-function mapStateIntoModuleProps(state) {
-  return {
-  };
-}
-
-export default connect(mapStateIntoModuleProps)(SearchBar);
+// function mapStateIntoModuleProps(state) {
+//   return {
+//   };
+// }
+//
+// export default connect(mapStateIntoModuleProps)(SearchBar);

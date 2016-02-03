@@ -1,37 +1,26 @@
-import { REQUEST_POSTS, RECEIVE_POSTS } from '../actions/actionNames';
-import {RECORDS_REQUEST,RECORDS_SUCCESS,RECORDS_FAILURE} from '../actions/inventoryAction';
-import {BOOK_REQUEST,BOOK_SUCCESS,BOOK_FAILURE} from '../actions/inventoryAction'
-const defaultState = {
-  isFetching: false,
-  items: [],
+
+import {GET_RECORDS_REQUEST,GET_RECORDS_SUCCESS,GET_RECORDS_FAILURE} from '../actions/inventoryAction';
+import {ADD_WANTEDBOOK_REQUEST,ADD_WANTEDBOOK_SUCCESS,ADD_WANTEDBOOK_FAILURE,SELECT_BOOK} from '../actions/inventoryAction'
+
+const initialState = {
   loading:false,
-  rentList:[],
   status:'',
-  wantToRent:[],
+  unReturnBooks:[],
+  wantedBooks:[],
 };
 
-export default function postsReducer(state=defaultState, action) {
+export default function inventoryReducer(state=initialState, action) {
   switch (action.type) {
-    case REQUEST_POSTS:
-      return Object.assign({}, state, {
-        isFetching: true
-      });
-    case RECEIVE_POSTS:
-      return Object.assign({}, state, {
-        isFetching: false,
-        items: action.items,
-      });
-    case RECORDS_REQUEST:
+    case GET_RECORDS_REQUEST:
       return Object.assign({}, state, {
         loading: true
       });
-    case RECORDS_SUCCESS:
-      console.log('records',action.rentRecords);
+    case GET_RECORDS_SUCCESS:
       let rentRecords = action.rentRecords;
       let unReturnBooks = [];
       rentRecords.map((records)=>{
         if(records.status==='R'){
-          unReturnBooks.push(records.inventory)
+          unReturnBooks.push({book:records.inventory,isSelected:true})
         }
       })
     //  const rentCount = unReturnBooks.length;
@@ -41,30 +30,56 @@ export default function postsReducer(state=defaultState, action) {
         rentRecords: action.rentRecords,
         unReturnBooks:unReturnBooks
       });
-    case RECORDS_FAILURE:
+    case GET_RECORDS_FAILURE:
       return Object.assign({}, state, {
         loading: false,
         status: action.err,
       });
-    case BOOK_REQUEST:
+
+
+    case ADD_WANTEDBOOK_REQUEST:
       return Object.assign({}, state, {
         loading: true,
       });
-    case BOOK_SUCCESS:
-      console.log(state);
-      console.log(action.book);
-      let wantToRent = state.wantToRent;
-      wantToRent.push(action.book);
+    case ADD_WANTEDBOOK_SUCCESS:
+      let wantedBooks = state.wantedBooks;
+      wantedBooks.push({book:action.book,isSelected:true});
       return Object.assign({}, state, {
         loading: false,
         status: 'success',
-        wantToRent: wantToRent,
+        wantedBooks: wantedBooks,
       });
-    case BOOK_FAILURE:
+    case ADD_WANTEDBOOK_FAILURE:
       return Object.assign({}, state, {
         loading: false,
         status: action.err,
       });
+
+    case SELECT_BOOK:{
+      if(action.page==='borrow'){
+        let currentBook = state.wantedBooks[action.index];
+        let newWantedBooks = [
+          ...state.wantedBooks.slice(0,action.index),
+          Object.assign({},currentBook,{isSelected:!currentBook.isSelected}),
+          ...state.wantedBooks.slice(action.index+1)
+        ]
+        return Object.assign({}, state, {
+          wantedBooks:newWantedBooks
+        });
+      }
+      if(action.page==='return'){
+        let currentBook = state.unReturnBooks[action.index];
+        let newUnreturnBooks = [
+          ...state.unReturnBooks.slice(0,action.index),
+          Object.assign({},currentBook,{isSelected:!currentBook.isSelected}),
+          ...state.unReturnBooks.slice(action.index+1)
+        ]
+        return Object.assign({}, state, {
+          unReturnBooks:newUnreturnBooks
+        });
+      }
+    }
+
     default:
       return state;
   }

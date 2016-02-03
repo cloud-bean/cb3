@@ -1,26 +1,29 @@
 import React from 'react';
 import UserProfile from './../../components/userProfile/UserProfile';
 import BookList from './../../components/BookList';
-import BookItem from './../../components/BookItem';
-import SearchBar from './../../components/SearchBar';
+import AddBookBar from './../../components/AddBookBar';
+import {addWantedBook,selectBook} from '../../actions/inventoryAction';
 import WeUI from 'react-weui';
 import {connect} from 'react-redux';
+
 const {Button,ButtonArea,Toast} = WeUI;
+
 export  class Borrow extends React.Component {
     handleClick(e){
+      //this.props.dispatch();
     }
     render() {
-        const {loading,wantToRent} = this.props;
+        const {loading,wantedBooks,dispatch,userStore} = this.props;
         return (
             <div>
-              <UserProfile></UserProfile>
-              <SearchBar></SearchBar>
-                <Toast icon="loading" show={loading}>
-                    正在加载中...
-                </Toast>
-              <BookList books={wantToRent}></BookList>
+              <Toast icon="loading" show={loading}>
+                  正在加载中...
+              </Toast>
+              <UserProfile userStore={userStore}></UserProfile>
+              <AddBookBar onAddClick={invCode=>dispatch(addWantedBook(invCode))}></AddBookBar>
+              <BookList listName='预借阅列表' books={wantedBooks} onSelect={index=>dispatch(selectBook(index,'borrow'))}> </BookList>
                 <ButtonArea>
-                    <Button onClick={e=>this.handleClick(e)}>确认借阅</Button>
+                    <Button>确认借阅</Button>
                 </ButtonArea>
             </div>
         )
@@ -29,8 +32,9 @@ export  class Borrow extends React.Component {
 function mapStateIntoModuleProps(state) {
     const inventoryStore = state.inventoryStore;
     return {
+        userStore:state.userStore,
         loading: inventoryStore.loading,
-        wantToRent:inventoryStore.wantToRent,
+        wantedBooks:inventoryStore.wantedBooks,
     };
 }
 export default connect(mapStateIntoModuleProps)(Borrow);
