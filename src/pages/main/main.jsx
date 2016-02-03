@@ -21,7 +21,7 @@ export class Main extends React.Component {
         const {dispatch,userStore} = this.props;
         return (
             <div>
-                { userStore.loading ?
+                { prompt.loading ?
                     <Toast icon="loading" show={true}>
                         正在加载中...
                     </Toast>
@@ -42,6 +42,7 @@ function mapStateIntoModuleProps(state) {
     const userStore = state.userStore;
     return {
         userStore:userStore,
+        prompt:state.prompt,
     };
 }
 export default connect(mapStateIntoModuleProps)(Main);

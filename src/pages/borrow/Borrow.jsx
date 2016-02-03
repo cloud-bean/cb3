@@ -3,6 +3,7 @@ import UserProfile from './../../components/userProfile/UserProfile';
 import BookList from './../../components/BookList';
 import AddBookBar from './../../components/AddBookBar';
 import {addWantedBook,selectBook,resetStatus} from '../../actions/inventoryAction';
+import {showAlert,showLoading} from '../../actions/promptAction';
 import WeUI from 'react-weui';
 import {connect} from 'react-redux';
 
@@ -14,7 +15,6 @@ export  class Borrow extends React.Component {
     super(props);
     this.state={
         alert: {
-            title: '出错啦',
             buttons: [
                 {
                     label: '好的',
@@ -28,23 +28,23 @@ export  class Borrow extends React.Component {
 
 
     hideAlert(){
-        this.props.dispatch(resetStatus());
+        this.props.dispatch(showAlert(false));
     }
 
     handleClick(e){
       //this.props.dispatch();
     }
     render() {
-        const {loading,wantedBooks,dispatch,userStore,status} = this.props;
+        const {loading,wantedBooks,dispatch,userStore,status,prompt} = this.props;
         return (
             <div>
               <Alert
-                    show={!(status==='success')}
-                    title={this.state.alert.title}
+                    show={prompt.alert.show}
+                    title={prompt.alert.title}
                     buttons={this.state.alert.buttons}>
-                        {status}
+                        {prompt.alert.content}
               </Alert>
-              <Toast icon="loading" show={loading}>
+              <Toast icon="loading" show={prompt.loading}>
                   正在加载中...
               </Toast>
               <UserProfile userStore={userStore}></UserProfile>
@@ -63,7 +63,8 @@ function mapStateIntoModuleProps(state) {
         userStore:state.userStore,
         loading: inventoryStore.loading,
         wantedBooks:inventoryStore.wantedBooks,
-        status:inventoryStore.status
+        status:inventoryStore.status,
+        prompt:state.prompt,
     };
 }
 export default connect(mapStateIntoModuleProps)(Borrow);

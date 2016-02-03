@@ -1,6 +1,6 @@
 
 import {GET_RECORDS_REQUEST,GET_RECORDS_SUCCESS,GET_RECORDS_FAILURE} from '../actions/inventoryAction';
-import {ADD_WANTEDBOOK_REQUEST,ADD_WANTEDBOOK_SUCCESS,ADD_WANTEDBOOK_FAILURE,SELECT_BOOK,RESET_STATUS} from '../actions/inventoryAction'
+import {ADD_WANTEDBOOK_REQUEST,ADD_WANTEDBOOK_SUCCESS,ADD_WANTEDBOOK_FAILURE,SELECT_BOOK} from '../actions/inventoryAction'
 
 const initialState = {
   loading:false,
@@ -13,7 +13,7 @@ export default function inventoryReducer(state=initialState, action) {
   switch (action.type) {
     case GET_RECORDS_REQUEST:
       return Object.assign({}, state, {
-        loading: true
+        status:'start'
       });
     case GET_RECORDS_SUCCESS:
       let rentRecords = action.rentRecords;
@@ -25,33 +25,29 @@ export default function inventoryReducer(state=initialState, action) {
       })
     //  const rentCount = unReturnBooks.length;
       return Object.assign({}, state, {
-        loading: false,
         status: 'success',
         rentRecords: action.rentRecords,
         unReturnBooks:unReturnBooks
       });
     case GET_RECORDS_FAILURE:
       return Object.assign({}, state, {
-        loading: false,
         status: action.status,
       });
 
 
     case ADD_WANTEDBOOK_REQUEST:
       return Object.assign({}, state, {
-        loading: true,
+        status:'start'
       });
     case ADD_WANTEDBOOK_SUCCESS:
       let wantedBooks = state.wantedBooks;
       wantedBooks.push({book:action.book,isSelected:true});
       return Object.assign({}, state, {
-        loading: false,
         status: 'success',
         wantedBooks: wantedBooks,
       });
     case ADD_WANTEDBOOK_FAILURE:
       return Object.assign({}, state, {
-        loading: false,
         status: action.status,
       });
 
@@ -79,10 +75,6 @@ export default function inventoryReducer(state=initialState, action) {
         });
       }
     }
-    case RESET_STATUS:
-      return Object.assign({}, state, {
-        status: 'success',
-      });
     default:
       return state;
   }

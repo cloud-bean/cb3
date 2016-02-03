@@ -1,7 +1,6 @@
 import $ from 'jquery';
-import { REQUEST_POSTS, RECEIVE_POSTS } from './actionNames';
 import * as service from '../ajaxService/service';
-
+import {showAlert,showLoading} from './promptAction';
 // export function requestPosts() {
 //   return {
 //     type: REQUEST_POSTS,
@@ -83,14 +82,17 @@ export function getRecords(memberid) {
         // 首次 dispatch：更新应用的 state 来通知
         // API 请求发起了。
         dispatch(getRecordsRequest());
+        dispatch(showLoading(true));
         // thunk middleware 调用的函数可以有返回值，
         // 它会被当作 dispatch 方法的返回值传递。
         // 这个案例中，我们返回一个等待处理的 promise。
         // 这并不是 redux middleware 所必须的，但这对于我们而言很方便。
         return service.getRentedBookOfMember(memberid).then((value)=> {
             dispatch(getRecordsSuccess(value));
+            dispatch(showLoading(false));
         }, (err)=> {
             dispatch(getRecordsFailure(err));
+            dispatch(showLoading(false));
         });
     }
 }
@@ -125,11 +127,14 @@ export function addWantedBookFailure(err) {
 export function addWantedBook(bookid) {
     return function (dispatch) {
         dispatch(addWantedBookRequest());
+        dispatch(showLoading(true));
         return service.getBookbyId(bookid).then((book)=> {
           if(book.isRent==='false'){
             dispatch(addWantedBookSuccess(book));
+            dispatch(showLoading(false));
           }else{
-            dispatch(addWantedBookFailure('所选图书已借出'));
+            dispatch(showLoading(false));
+            dispatch(showAlert(true,'警告','所选图书已借出'));
           }
         }, (err)=> {
             dispatch(addWantedBookFailure(err));
@@ -147,12 +152,6 @@ export function selectBook(index,page){
 }
 
 
-export const RESET_STATUS = 'RESET_STATUS';
-export function resetStatus(){
-  return {
-    type:RESET_STATUS,
-  }
-}
 // export const RETURN_BOOK_REQUEST = 'RETURN_BOOK_REQUEST';
 // export const RETURN_BOOK_SUCCESS = 'RETURN_BOOK_SUCCESS';
 // export const RETURN_BOOK_FAILURE = 'RETURN_BOOK_FAILURE';

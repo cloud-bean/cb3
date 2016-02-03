@@ -14,11 +14,11 @@ export  class Return extends React.Component {
       this.props.dispatch(getRecords(this.props.userStore.user._id))
     }
     render() {
-        const {loading,unReturnBooks,dispatch,userStore} = this.props;
+        const {loading,unReturnBooks,dispatch,userStore,prompt} = this.props;
         console.log('unReturnBooks',unReturnBooks);
         return (
             <div>
-              { loading ?
+              { prompt.loading ?
                   <Toast icon="loading" show={true}>
                       正在加载中...
                   </Toast>
@@ -43,6 +43,7 @@ function mapStateIntoModuleProps(state) {
         userStore : userStore,
         loading: inventoryStore.loading,
         unReturnBooks:inventoryStore.unReturnBooks,
+        prompt:state.prompt,
     };
 }
 export default connect(mapStateIntoModuleProps)(Return);
