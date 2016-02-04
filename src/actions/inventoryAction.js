@@ -129,11 +129,10 @@ export function addWantedBook(bookid) {
         dispatch(addWantedBookRequest());
         dispatch(showLoading(true));
         return service.getBookbyId(bookid).then((book)=> {
-          if(book.isRent==='false'){
+            dispatch(showLoading(false));
+          if(book.isRent===false){
             dispatch(addWantedBookSuccess(book));
-            dispatch(showLoading(false));
           }else{
-            dispatch(showLoading(false));
             dispatch(showAlert(true,'警告','所选图书已借出'));
           }
         }, (err)=> {

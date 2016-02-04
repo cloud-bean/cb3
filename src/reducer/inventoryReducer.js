@@ -1,6 +1,7 @@
 
 import {GET_RECORDS_REQUEST,GET_RECORDS_SUCCESS,GET_RECORDS_FAILURE} from '../actions/inventoryAction';
 import {ADD_WANTEDBOOK_REQUEST,ADD_WANTEDBOOK_SUCCESS,ADD_WANTEDBOOK_FAILURE,SELECT_BOOK} from '../actions/inventoryAction'
+import _ from 'underscore';
 
 const initialState = {
   loading:false,
@@ -41,7 +42,15 @@ export default function inventoryReducer(state=initialState, action) {
       });
     case ADD_WANTEDBOOK_SUCCESS:
       let wantedBooks = state.wantedBooks;
-      wantedBooks.push({book:action.book,isSelected:true});
+      let duplicateFlag = false;
+      _.each(wantedBooks,(wantedBook)=>{
+        if(wantedBook.book._id==action.book._id){
+          duplicateFlag=true;
+        }
+      });
+      if(duplicateFlag==false){
+        wantedBooks.push({book:action.book,isSelected:true});
+      }
       return Object.assign({}, state, {
         status: 'success',
         wantedBooks: wantedBooks,

@@ -18,10 +18,10 @@ export class Main extends React.Component {
     }
 
     render() {
-        const {dispatch,userStore} = this.props;
+        const {dispatch,userStore,prompt} = this.props;
         return (
             <div>
-                { prompt.loading ?
+                {prompt.loading ?
                     <Toast icon="loading" show={true}>
                         正在加载中...
                     </Toast>
