@@ -1,6 +1,8 @@
 
 import {GET_RECORDS_REQUEST,GET_RECORDS_SUCCESS,GET_RECORDS_FAILURE} from '../actions/inventoryAction';
-import {ADD_WANTEDBOOK_REQUEST,ADD_WANTEDBOOK_SUCCESS,ADD_WANTEDBOOK_FAILURE,SELECT_BOOK} from '../actions/inventoryAction'
+import {ADD_WANTEDBOOK_REQUEST,ADD_WANTEDBOOK_SUCCESS,ADD_WANTEDBOOK_FAILURE,SELECT_BOOK} from '../actions/inventoryAction';
+import {BORROW_BOOK_REQUEST,BORROW_BOOK_SUCCESS,BORROW_BOOK_FAILURE} from '../actions/inventoryAction';
+import {RETURN_BOOK_REQUEST,RETURN_BOOK_SUCCESS,RETURN_BOOK_FAILURE} from '../actions/inventoryAction';
 import _ from 'underscore';
 
 const initialState = {
@@ -21,7 +23,7 @@ export default function inventoryReducer(state=initialState, action) {
       let unReturnBooks = [];
       rentRecords.map((records)=>{
         if(records.status==='R'){
-          unReturnBooks.push({book:records.inventory,isSelected:true})
+          unReturnBooks.push({book:records.inventory,isSelected:true,recordId:records._id})
         }
       })
     //  const rentCount = unReturnBooks.length;
@@ -84,6 +86,51 @@ export default function inventoryReducer(state=initialState, action) {
         });
       }
     }
+    case BORROW_BOOK_REQUEST:
+      return Object.assign({}, state, {
+        status: 'start',
+      });
+    case BORROW_BOOK_SUCCESS:
+      let curBorrowIndex = 0;
+      for (let [index,elem] of state.wantedBooks.entries()){
+        if(action.record.inventory._id == elem.book._id){
+          curBorrowIndex=index;
+        }
+      }
+      let newWantedBooks = [...state.wantedBooks.slice(0,curBorrowIndex),...state.wantedBooks.slice(curBorrowIndex+1)];
+      return Object.assign({}, state, {
+        status: 'success',
+        wantedBooks:newWantedBooks,
+      });
+    case BORROW_BOOK_FAILURE:
+      return Object.assign({}, state, {
+        status: action.status,
+      });
+
+    case RETURN_BOOK_REQUEST:
+      return Object.assign({}, state, {
+        status: 'start',
+      });
+    case RETURN_BOOK_SUCCESS:
+      let curReturnIndex = 0;
+      for (let [index,elem] of state.unReturnBooks.entries()){
+        if(action.record.inventory._id == elem.book._id){
+          curReturnIndex=index;
+        }
+      }
+      console.log('curReturnIndex',curReturnIndex);
+      console.log(state);
+
+      let newUnreturnBooks = [...state.unReturnBooks.slice(0,curReturnIndex),...state.unReturnBooks.slice(curReturnIndex+1)];
+      console.log(newUnreturnBooks);
+      return Object.assign({}, state, {
+        status: 'success',
+        unReturnBooks:newUnreturnBooks,
+      });
+    case RETURN_BOOK_FAILURE:
+      return Object.assign({}, state, {
+        status: action.status,
+      });
     default:
       return state;
   }

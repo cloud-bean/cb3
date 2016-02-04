@@ -150,52 +150,85 @@ export function selectBook(index,page){
   }
 }
 
+export const BORROW_BOOK_REQUEST = 'BORROW_BOOK_REQUEST';
+export const BORROW_BOOK_SUCCESS = 'BORROW_BOOK_SUCCESS';
+export const BORROW_BOOK_FAILURE = 'BORROW_BOOK_FAILURE';
 
-// export const RETURN_BOOK_REQUEST = 'RETURN_BOOK_REQUEST';
-// export const RETURN_BOOK_SUCCESS = 'RETURN_BOOK_SUCCESS';
-// export const RETURN_BOOK_FAILURE = 'RETURN_BOOK_FAILURE';
-//
-// export function returnBookRequest() {
-//     return {
-//         type: RETURNBOOK_REQUEST
-//     }
-// }
-// export function returnBookSuccess(books) {
-//     return {
-//         type: RETURNBOOK_SUCCESS,
-//         books: books
-//     }
-// }
-// export function returnBookFailure(err) {
-//     return {
-//         type: RETURNBOOK_FAILURE,
-//         status: err
-//     }
-// }
-//
-// export const ITEM_CHECKED_CHANGE ='ITEM_CHECKED_CHANGE';
-// export function itemCheckedChange(){
-//   return {
-//       type: ITEM_CHECKED_CHANGE,
-//   }
-// }
-//
-// export function returnBook(recordId,bookName) {
-//     // Thunk middleware 知道如何处理函数。
-//     // 这里把 dispatch 方法通过参数的形式传给函数，
-//     // 以此来让它自己也能 dispatch action。
-//     return function (dispatch) {
-//         // 首次 dispatch：更新应用的 state 来通知
-//         // API 请求发起了。
-//         dispatch(returnBookRequest());
-//         // thunk middleware 调用的函数可以有返回值，
-//         // 它会被当作 dispatch 方法的返回值传递。
-//         // 这个案例中，我们返回一个等待处理的 promise。
-//         // 这并不是 redux middleware 所必须的，但这对于我们而言很方便。
-//         return service.returnBook(bookid).then((value)=> {
-//             dispatch(returnBookSuccess(value));
-//         }, (err)=> {
-//             returnBookFailure(err);
-//         });
-//     }
-// }
+export function borrowBookRequest() {
+    return {
+        type: BORROW_BOOK_REQUEST
+    }
+}
+export function borrowBookSuccess(record) {
+    return {
+        type: BORROW_BOOK_SUCCESS,
+        record
+    }
+}
+export function borrowBookFailure(err) {
+    return {
+        type: BORROW_BOOK_FAILURE,
+        status: err
+    }
+}
+
+export function borrowBook(memberId,bookId,bookName) {
+    // Thunk middleware 知道如何处理函数。
+    // 这里把 dispatch 方法通过参数的形式传给函数，
+    // 以此来让它自己也能 dispatch action。
+    return function (dispatch) {
+        // 首次 dispatch：更新应用的 state 来通知
+        // API 请求发起了。
+        dispatch(borrowBookRequest());
+        // thunk middleware 调用的函数可以有返回值，
+        // 它会被当作 dispatch 方法的返回值传递。
+        // 这个案例中，我们返回一个等待处理的 promise。
+        // 这并不是 redux middleware 所必须的，但这对于我们而言很方便。
+        return service.borrowBook(memberId,bookId,bookName).then((value)=> {
+            dispatch(borrowBookSuccess(value));
+        }, (err)=> {
+            dispatch(borrowBookFailure(err));
+        });
+    }
+}
+
+export const RETURN_BOOK_REQUEST = 'RETURN_BOOK_REQUEST';
+export const RETURN_BOOK_SUCCESS = 'RETURN_BOOK_SUCCESS';
+export const RETURN_BOOK_FAILURE = 'RETURN_BOOK_FAILURE';
+
+export function returnBookRequest() {
+    return {
+        type: RETURN_BOOK_REQUEST
+    }
+}
+export function returnBookSuccess(record) {
+    return {
+        type: RETURN_BOOK_SUCCESS,
+        record
+    }
+}
+export function returnBookFailure(err) {
+    return {
+        type: RETURN_BOOK_FAILURE,
+        status: err
+    }
+}
+
+export function returnBook(recordId,bookName) {
+    // Thunk middleware 知道如何处理函数。
+    // 这里把 dispatch 方法通过参数的形式传给函数，
+    // 以此来让它自己也能 dispatch action。
+    return dispatch=>{
+        // 首次 dispatch：更新应用的 state 来通知
+        // API 请求发起了。
+        dispatch(returnBookRequest());
+        // thunk middleware 调用的函数可以有返回值，
+        // 它会被当作 dispatch 方法的返回值传递。
+        // 这个案例中，我们返回一个等待处理的 promise。
+        // 这并不是 redux middleware 所必须的，但这对于我们而言很方便。
+        return service.returnBook(recordId).then((value)=> {
+            console.log(value);
+            dispatch(returnBookSuccess(value));
+        });
+    }
+}

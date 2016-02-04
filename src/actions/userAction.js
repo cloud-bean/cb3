@@ -44,3 +44,12 @@ export function fetchUser(phone) {
         });
     }
 }
+
+export const SET_USER_RENTCOUNT = 'SET_USER_RENTCOUNT';
+export function setUserRentCount(value) {
+    return {
+        type: SET_USER_RENTCOUNT,
+        value
+
+    }
+}

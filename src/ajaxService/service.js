@@ -53,7 +53,7 @@ export function getRentedBookOfMember(memberid){
 
 
 
-export function rentBook(memberId,bookId,bookName){
+export function borrowBook(memberId,bookId,bookName){
   return new Promise((resovle,reject)=>{
     let url = GENERAL_CONFIG.baseUrl + '/records/mob/create';
     let dataStr = 'mId=' + memberId + '&bId=' + bookId + '&status=R';
@@ -75,16 +75,11 @@ export function rentBook(memberId,bookId,bookName){
 
 export function returnBook(recordId,bookName){
   return new Promise((resovle,reject)=>{
-    let url = GENERAL_CONFIG.baseUrl + '/records/mob/create'+recordId;
-    $.ajax({
-      url:url,
-      type:'GET',
-      success:(data)=>{
-        resovle(bookName);
-      },
-      error:(err)=>{
-        reject(err);
+    let url = GENERAL_CONFIG.baseUrl + '/records/mob/return/'+recordId;
+    $.getJSON(url,(data,status)=>{
+      if(status === 'success'){
+        resovle(data);
       }
     });
-  })
+  });
 }

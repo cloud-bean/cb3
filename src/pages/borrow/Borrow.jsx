@@ -2,7 +2,8 @@ import React from 'react';
 import UserProfile from './../../components/userProfile/UserProfile';
 import BookList from './../../components/BookList';
 import AddBookBar from './../../components/AddBookBar';
-import {addWantedBook,selectBook,resetStatus} from '../../actions/inventoryAction';
+import {setUserRentCount} from '../../actions/userAction';
+import {addWantedBook,selectBook,borrowBook} from '../../actions/inventoryAction';
 import {showAlert,showLoading} from '../../actions/promptAction';
 import WeUI from 'react-weui';
 import {connect} from 'react-redux';
@@ -38,10 +39,24 @@ export  class Borrow extends React.Component {
           checkedWantBook.push(elem.book);
         }
       }
-      if(checkedWantBook.length>(4-this.props.userStore.rentCount)){
+      let checkedCount = checkedWantBook.length;
+      if(checkedCount>(4-this.props.userStore.rentCount)){
         this.props.dispatch(showAlert(true,'警告','超出借书数量，请先还书'))
       }else{
         //确认借书操作
+        this.props.dispatch(showLoading(true));
+        for (let elem of checkedWantBook.values()){
+            this.props.dispatch(borrowBook(this.props.userStore.user._id,elem._id,elem.name)).then(()=>{
+              this.props.dispatch(setUserRentCount('add'))
+              console.log('checkedCount',checkedCount);
+
+              checkedCount=checkedCount-1;
+              if(checkedCount==0){
+                this.props.dispatch(showLoading(false));
+                this.props.dispatch(showAlert(true,'提示','借书成功'));
+              }
+            });
+        }
       }
       //this.props.dispatch();
     }
