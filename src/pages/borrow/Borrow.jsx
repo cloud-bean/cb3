@@ -32,6 +32,17 @@ export  class Borrow extends React.Component {
     }
 
     handleClick(e){
+      let checkedWantBook = [];
+      for (let elem of this.props.wantedBooks.values()){
+        if(elem.isSelected==true){
+          checkedWantBook.push(elem.book);
+        }
+      }
+      if(checkedWantBook.length>(4-this.props.userStore.rentCount)){
+        this.props.dispatch(showAlert(true,'警告','超出借书数量，请先还书'))
+      }else{
+        //确认借书操作
+      }
       //this.props.dispatch();
     }
     render() {
@@ -51,7 +62,7 @@ export  class Borrow extends React.Component {
               <AddBookBar onAddClick={invCode=>dispatch(addWantedBook(invCode))}></AddBookBar>
               <BookList listName='预借阅列表' books={wantedBooks} onSelect={index=>dispatch(selectBook(index,'borrow'))}> </BookList>
                 <ButtonArea>
-                    <Button>确认借阅</Button>
+                    <Button onClick={e=>this.handleClick(e)}>确认借阅</Button>
                 </ButtonArea>
             </div>
         )
