@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.1",
+    "express": "^4.13.4",
     "history": "^1.13.1",
     "isomorphic-fetch": "^2.2.0",
     "jquery": "^2.1.4",
