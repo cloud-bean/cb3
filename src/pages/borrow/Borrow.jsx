@@ -34,7 +34,7 @@ export  class Borrow extends React.Component {
 
     handleClick(e){
       let checkedWantBook = [];
-      for (let elem of this.props.wantedBooks.values()){
+      for (let elem of this.props.wantedBooks){
         if(elem.isSelected==true){
           checkedWantBook.push(elem.book);
         }
@@ -45,7 +45,7 @@ export  class Borrow extends React.Component {
       }else{
         //确认借书操作
         this.props.dispatch(showLoading(true));
-        for (let elem of checkedWantBook.values()){
+        for (let elem of checkedWantBook){
             this.props.dispatch(borrowBook(this.props.userStore.user._id,elem._id,elem.name)).then(()=>{
               this.props.dispatch(setUserRentCount('add'))
               console.log('checkedCount',checkedCount);

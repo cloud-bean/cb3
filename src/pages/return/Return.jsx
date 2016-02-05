@@ -35,7 +35,7 @@ export  class Return extends React.Component {
     }
     handleClick(e){
       let checkedReturnBook = [];
-      for (let elem of this.props.unReturnBooks.values()){
+      for (let elem of this.props.unReturnBooks){
         if(elem.isSelected==true){
           checkedReturnBook.push(elem);
         }
@@ -47,7 +47,7 @@ export  class Return extends React.Component {
       }else{
         //确认借书操作
         this.props.dispatch(showLoading(true));
-        for (let elem of checkedReturnBook.values()){
+        for (let elem of checkedReturnBook){
             this.props.dispatch(returnBook(elem.recordId)).then(()=>{
               this.props.dispatch(setUserRentCount('min'))
               checkedCount=checkedCount-1;
