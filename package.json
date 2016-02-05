@@ -4,7 +4,7 @@
   "description": "we build cloud-bean 3.0",
   "scripts": {
     "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "deploy": "NODE_ENV=production webpack --config webpack.production.config.js",
+    "dist": "NODE_ENV=production ./node_modules/webpack/bin/webpack --config webpack.production.config.js ",
     "test": "./node_modules/mocha/bin/mocha  --compilers js:babel-core/register --require ./test/testHelper.js 'test/**/*.@(js|jsx)'"
   },
   "repository": {
@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.1",
+    "express": "^4.13.4",
     "history": "^1.13.1",
     "isomorphic-fetch": "^2.2.0",
     "jquery": "^2.1.4",
