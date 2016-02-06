@@ -7,7 +7,6 @@ import promptReducer from './promptActionReducer'
 
 export default combineReducers({
     inventoryStore: inventoryReducer,
-    dashboardStore: dashboardMemberReducer,
     logStore: logStoreReducer,
     userStore:userReducer,
     prompt:promptReducer
