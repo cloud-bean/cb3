@@ -1,4 +1,5 @@
 import {SHOW_ALERT,SHOW_LOADING} from '../actions/promptAction';
+import $ from 'jquery';
 
 const initialState = {
   alert:{},
@@ -8,7 +9,7 @@ const initialState = {
 export default function promptReducer(state=initialState, action) {
   switch (action.type) {
     case SHOW_ALERT:
-      return Object.assign({}, state, {
+      return $.extend({}, state, {
         alert:{
           show:action.show,
           title:action.title,
@@ -16,7 +17,7 @@ export default function promptReducer(state=initialState, action) {
         }
       });
     case SHOW_LOADING:
-      return Object.assign({}, state, {
+      return $.extend({}, state, {
         loading: action.show,
       });
     default:

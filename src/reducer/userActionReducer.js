@@ -1,5 +1,5 @@
 import { USER_REQUEST,USER_SUCCESS,USER_FAILURE ,SET_USER_RENTCOUNT} from '../actions/userAction';
-
+import $ from 'jquery';
 
 const initialState = {
   user:{},
@@ -10,26 +10,26 @@ const initialState = {
 export default function userReducer(state=initialState, action) {
   switch (action.type) {
     case USER_REQUEST:
-      return Object.assign({}, state, {
+      return $.extend({}, state, {
         status:'start'
       });
     case USER_SUCCESS:
-      return Object.assign({}, state, {
+      return $.extend({}, state, {
         status:'success',
         user:action.user.member,
         rentCount:action.user.rentCount,
       });
     case USER_FAILURE:
-      return Object.assign({}, state, {
+      return $.extend({}, state, {
         status:action.err,
       });
     case SET_USER_RENTCOUNT:
       if(action.value=='add'){
-         return Object.assign({}, state, {
+         return $.extend({}, state, {
           rentCount:state.rentCount+1,
         });
       }else if(action.value=='min'){
-         return Object.assign({}, state, {
+         return $.extend({}, state, {
           rentCount:state.rentCount-1,
         });
       }

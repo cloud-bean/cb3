@@ -4,6 +4,8 @@ import {ADD_WANTEDBOOK_REQUEST,ADD_WANTEDBOOK_SUCCESS,ADD_WANTEDBOOK_FAILURE,SEL
 import {BORROW_BOOK_REQUEST,BORROW_BOOK_SUCCESS,BORROW_BOOK_FAILURE} from '../actions/inventoryAction';
 import {RETURN_BOOK_REQUEST,RETURN_BOOK_SUCCESS,RETURN_BOOK_FAILURE} from '../actions/inventoryAction';
 import _ from 'underscore';
+import $ from 'jquery';
+
 
 const initialState = {
   loading:false,
@@ -15,7 +17,7 @@ const initialState = {
 export default function inventoryReducer(state=initialState, action) {
   switch (action.type) {
     case GET_RECORDS_REQUEST:
-      return Object.assign({}, state, {
+      return $.extend({}, state, {
         status:'start'
       });
     case GET_RECORDS_SUCCESS:
@@ -27,19 +29,19 @@ export default function inventoryReducer(state=initialState, action) {
         }
       })
     //  const rentCount = unReturnBooks.length;
-      return Object.assign({}, state, {
+      return $.extend({}, state, {
         status: 'success',
         rentRecords: action.rentRecords,
         unReturnBooks:unReturnBooks
       });
     case GET_RECORDS_FAILURE:
-      return Object.assign({}, state, {
+      return $.extend({}, state, {
         status: action.status,
       });
 
 
     case ADD_WANTEDBOOK_REQUEST:
-      return Object.assign({}, state, {
+      return $.extend({}, state, {
         status:'start'
       });
     case ADD_WANTEDBOOK_SUCCESS:
@@ -53,12 +55,12 @@ export default function inventoryReducer(state=initialState, action) {
       if(duplicateFlag==false){
         wantedBooks.push({book:action.book,isSelected:true});
       }
-      return Object.assign({}, state, {
+      return $.extend({}, state, {
         status: 'success',
         wantedBooks: wantedBooks,
       });
     case ADD_WANTEDBOOK_FAILURE:
-      return Object.assign({}, state, {
+      return $.extend({}, state, {
         status: action.status,
       });
 
@@ -67,10 +69,10 @@ export default function inventoryReducer(state=initialState, action) {
         let currentBook = state.wantedBooks[action.index];
         let newWantedBooks = [
           ...state.wantedBooks.slice(0,action.index),
-          Object.assign({},currentBook,{isSelected:!currentBook.isSelected}),
+          $.extend({},currentBook,{isSelected:!currentBook.isSelected}),
           ...state.wantedBooks.slice(action.index+1)
         ]
-        return Object.assign({}, state, {
+        return $.extend({}, state, {
           wantedBooks:newWantedBooks
         });
       }
@@ -78,16 +80,16 @@ export default function inventoryReducer(state=initialState, action) {
         let currentBook = state.unReturnBooks[action.index];
         let newUnreturnBooks = [
           ...state.unReturnBooks.slice(0,action.index),
-          Object.assign({},currentBook,{isSelected:!currentBook.isSelected}),
+          $.extend({},currentBook,{isSelected:!currentBook.isSelected}),
           ...state.unReturnBooks.slice(action.index+1)
         ]
-        return Object.assign({}, state, {
+        return $.extend({}, state, {
           unReturnBooks:newUnreturnBooks
         });
       }
     }
     case BORROW_BOOK_REQUEST:
-      return Object.assign({}, state, {
+      return $.extend({}, state, {
         status: 'start',
       });
     case BORROW_BOOK_SUCCESS:
@@ -98,17 +100,17 @@ export default function inventoryReducer(state=initialState, action) {
         }
       }
       let newWantedBooks = [...state.wantedBooks.slice(0,curBorrowIndex),...state.wantedBooks.slice(curBorrowIndex+1)];
-      return Object.assign({}, state, {
+      return $.extend({}, state, {
         status: 'success',
         wantedBooks:newWantedBooks,
       });
     case BORROW_BOOK_FAILURE:
-      return Object.assign({}, state, {
+      return $.extend({}, state, {
         status: action.status,
       });
 
     case RETURN_BOOK_REQUEST:
-      return Object.assign({}, state, {
+      return $.extend({}, state, {
         status: 'start',
       });
     case RETURN_BOOK_SUCCESS:
@@ -123,12 +125,12 @@ export default function inventoryReducer(state=initialState, action) {
 
       let newUnreturnBooks = [...state.unReturnBooks.slice(0,curReturnIndex),...state.unReturnBooks.slice(curReturnIndex+1)];
       console.log(newUnreturnBooks);
-      return Object.assign({}, state, {
+      return $.extend({}, state, {
         status: 'success',
         unReturnBooks:newUnreturnBooks,
       });
     case RETURN_BOOK_FAILURE:
-      return Object.assign({}, state, {
+      return $.extend({}, state, {
         status: action.status,
       });
     default:

@@ -30,14 +30,10 @@ export function getBookbyId(bookid){
 }
 
 export function getMembyPhone(phone){
-  return new Promise((resovle,reject)=>{
+
     let url = GENERAL_CONFIG.baseUrl + '/members/mob/phone/' + phone;
-    $.getJSON(url,(data,status)=>{
-      if(status === 'success'){
-        resovle(data);
-      }
-    });
-  })
+    return $.getJSON(url);
+
 }
 
 export function getRentedBookOfMember(memberid){
