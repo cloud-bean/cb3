@@ -38,7 +38,7 @@ module.exports = {
             sourceMap: false,
             mangle: false
         }),
-        new ExtractTextPlugin("style.css", {
+        new ExtractTextPlugin("bundle.css", {
             allChunks: true
         })
     ]
