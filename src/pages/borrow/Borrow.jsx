@@ -7,6 +7,8 @@ import {addWantedBook,selectBook,borrowBook} from '../../actions/inventoryAction
 import {showAlert,showLoading} from '../../actions/promptAction';
 import WeUI from 'react-weui';
 import {connect} from 'react-redux';
+import $ from 'jquery';
+
 
 const {Button,ButtonArea,Toast,Dialog} = WeUI;
 const {Alert} = Dialog;
@@ -34,18 +36,19 @@ export  class Borrow extends React.Component {
 
     handleClick(e){
       let checkedWantBook = [];
-      for (let elem of this.props.wantedBooks){
+      $.each(this.props.wantedBooks,(index,elem)=>{
         if(elem.isSelected==true){
           checkedWantBook.push(elem.book);
         }
-      }
+      })
       let checkedCount = checkedWantBook.length;
+      alert('aa');
       if(checkedCount>(4-this.props.userStore.rentCount)){
         this.props.dispatch(showAlert(true,'警告','超出借书数量，请先还书'))
       }else{
         //确认借书操作
         this.props.dispatch(showLoading(true));
-        for (let elem of checkedWantBook){
+        $.each(checkedWantBook,(index,elem)=>{
             this.props.dispatch(borrowBook(this.props.userStore.user._id,elem._id,elem.name)).then(()=>{
               this.props.dispatch(setUserRentCount('add'))
               console.log('checkedCount',checkedCount);
@@ -56,7 +59,7 @@ export  class Borrow extends React.Component {
                 this.props.dispatch(showAlert(true,'提示','借书成功'));
               }
             });
-        }
+        });
       }
       //this.props.dispatch();
     }

@@ -14,37 +14,18 @@ const GENERAL_CONFIG = {
 }
 
 export function getBookbyId(bookid){
-  return new Promise((resovle,reject)=>{
     let url = GENERAL_CONFIG.baseUrl + '/inventories/invCode/' + bookid;
-    $.getJSON(url,(data,status)=>{
-      if(status === 'success'){
-        resovle(data);
-      }
-
-      // if(status === 'error'){
-      //   reject(data);
-      //   console.log(status);
-      // }
-    });
-  })
+    return $.getJSON(url);
 }
 
 export function getMembyPhone(phone){
-
     let url = GENERAL_CONFIG.baseUrl + '/members/mob/phone/' + phone;
     return $.getJSON(url);
-
 }
 
 export function getRentedBookOfMember(memberid){
-  return new Promise((resovle,reject)=>{
     let url = GENERAL_CONFIG.baseUrl + '/records/mob/' + memberid;
-    $.getJSON(url,(data,status)=>{
-      if(status === 'success'){
-        resovle(data);
-      }
-    });
-  })
+    return $.getJSON(url);
 }
 
 
@@ -68,14 +49,7 @@ export function borrowBook(memberId,bookId,bookName){
   })
 }
 
-
 export function returnBook(recordId,bookName){
-  return new Promise((resovle,reject)=>{
     let url = GENERAL_CONFIG.baseUrl + '/records/mob/return/'+recordId;
-    $.getJSON(url,(data,status)=>{
-      if(status === 'success'){
-        resovle(data);
-      }
-    });
-  });
+    return $.getJSON(url);
 }

@@ -3,7 +3,6 @@ import {GET_RECORDS_REQUEST,GET_RECORDS_SUCCESS,GET_RECORDS_FAILURE} from '../ac
 import {ADD_WANTEDBOOK_REQUEST,ADD_WANTEDBOOK_SUCCESS,ADD_WANTEDBOOK_FAILURE,SELECT_BOOK} from '../actions/inventoryAction';
 import {BORROW_BOOK_REQUEST,BORROW_BOOK_SUCCESS,BORROW_BOOK_FAILURE} from '../actions/inventoryAction';
 import {RETURN_BOOK_REQUEST,RETURN_BOOK_SUCCESS,RETURN_BOOK_FAILURE} from '../actions/inventoryAction';
-import _ from 'underscore';
 import $ from 'jquery';
 
 
@@ -47,7 +46,7 @@ export default function inventoryReducer(state=initialState, action) {
     case ADD_WANTEDBOOK_SUCCESS:
       let wantedBooks = state.wantedBooks;
       let duplicateFlag = false;
-      _.each(wantedBooks,(wantedBook)=>{
+      $.each(wantedBooks,(index,wantedBook)=>{
         if(wantedBook.book._id==action.book._id){
           duplicateFlag=true;
         }
@@ -94,11 +93,11 @@ export default function inventoryReducer(state=initialState, action) {
       });
     case BORROW_BOOK_SUCCESS:
       let curBorrowIndex = 0;
-      for (let [index,elem] of state.wantedBooks.entries()){
+      $.each(state.wantedBooks,(index,elem)=>{
         if(action.record.inventory._id == elem.book._id){
           curBorrowIndex=index;
         }
-      }
+      });
       let newWantedBooks = [...state.wantedBooks.slice(0,curBorrowIndex),...state.wantedBooks.slice(curBorrowIndex+1)];
       return $.extend({}, state, {
         status: 'success',
@@ -115,16 +114,12 @@ export default function inventoryReducer(state=initialState, action) {
       });
     case RETURN_BOOK_SUCCESS:
       let curReturnIndex = 0;
-      for (let [index,elem] of state.unReturnBooks.entries()){
+      $.each(state.unReturnBooks,(index,elem)=>{
         if(action.record.inventory._id == elem.book._id){
           curReturnIndex=index;
         }
-      }
-      console.log('curReturnIndex',curReturnIndex);
-      console.log(state);
-
+      });
       let newUnreturnBooks = [...state.unReturnBooks.slice(0,curReturnIndex),...state.unReturnBooks.slice(curReturnIndex+1)];
-      console.log(newUnreturnBooks);
       return $.extend({}, state, {
         status: 'success',
         unReturnBooks:newUnreturnBooks,
