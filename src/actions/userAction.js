@@ -30,18 +30,20 @@ export function fetchUser(phone) {
         // 首次 dispatch：更新应用的 state 来通知
         // API 请求发起了。
         dispatch(userRequest());
-        dispatch(showLoading(true));
+
         // thunk middleware 调用的函数可以有返回值，
         // 它会被当作 dispatch 方法的返回值传递。
         // 这个案例中，我们返回一个等待处理的 promise。
         // 这并不是 redux middleware 所必须的，但这对于我们而言很方便。
         return service.getMembyPhone(phone).then((value)=> {
             dispatch(userSuccess(value));
-            dispatch(showLoading(false));
-        }, (err)=> {
-            dispatch(userFailure(err));
-            dispatch(showLoading(false));
-        });
+            // dispatch(showLoading(false));
+        }
+        // , (err)=> {
+        //     dispatch(userFailure(err));
+        //     // dispatch(showLoading(false));
+        // }
+      );
     }
 }
 

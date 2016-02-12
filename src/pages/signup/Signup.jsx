@@ -1,8 +1,9 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link,browserHistory} from 'react-router';
 import WeUI from 'react-weui';
 import store from '../../reduxStore';
-import {fetchUser} from '../../actions/userAction'
+import {fetchUser} from '../../actions/userAction';
+import {showAlert,showLoading} from '../../actions/promptAction';
 import {connect} from 'react-redux';
 
 const {Button,ButtonArea,Toast,Dialog} = WeUI;
@@ -10,21 +11,42 @@ const {Alert} = Dialog;
 
 
 class Signup extends React.Component {
-	constructor(){
-		super();
-        this.handleChange = this.handleChange.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-	}
+		constructor(){
+			super();
+			this.state={
+	        alert: {
+	            buttons: [
+	                {
+	                    label: '好的',
+	                    onClick: this.hideAlert.bind(this)
+	                }
+	            ]
+	        }
+	    };
+	    this.handleChange = this.handleChange.bind(this);
+	    this.handleClick = this.handleClick.bind(this);
+		}
 
     handleChange(e){
         this.setState({phone: e.target.value}, function (err){
         });
     }
-
+		hideAlert(){
+				this.props.dispatch(showAlert(false));
+		}
     handleClick() {
 				const dispatch = this.props.dispatch;
-
-        dispatch(fetchUser(this.state.phone));
+				dispatch(showLoading(true));
+        dispatch(fetchUser(this.state.phone))
+				.then((value)=> {
+					dispatch(showLoading(false));
+					browserHistory.push('/main');
+				})
+				.fail((err)=>{
+					console.log(err);
+					dispatch(showLoading(false));
+					dispatch(showAlert(true,'提示',err.responseText))
+				});
 				// .then(()=>{
 				// 	  // dispatch(fetchRecords(store.getState().userStore.user._id)).then(()=>{
 				// 		// 		console.log(store.getState());
@@ -34,9 +56,19 @@ class Signup extends React.Component {
     }
 
 	render(){
+		const {prompt} = this.props;
 		return (
 
 			<div className='container'>
+				<Alert
+							show={prompt.alert.show}
+							title={prompt.alert.title}
+							buttons={this.state.alert.buttons}>
+									{prompt.alert.content}
+				</Alert>
+				<Toast icon="loading" show={prompt.loading}>
+						正在加载中...
+				</Toast>
                 <div className="page">
                     <div className="bd">
                         <div className="weui_cells_title">用户登录</div>
@@ -50,7 +82,7 @@ class Signup extends React.Component {
                         </div>
                         <div className="weui_cells_tips">请输入您注册会员时的手机号</div>
                             <div className="weui_btn_area">
-                              <Link to="/main">  <Button onClick={this.handleClick}>确定</Button></Link>
+                               <Button onClick={this.handleClick}>确定</Button>
                         </div>
                     </div>
                 </div>
@@ -64,6 +96,7 @@ class Signup extends React.Component {
 
 function mapStateIntoModuleProps(state) {
   return {
+		prompt:state.prompt
   };
 }
 

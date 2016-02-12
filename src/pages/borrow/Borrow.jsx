@@ -42,7 +42,6 @@ export  class Borrow extends React.Component {
         }
       })
       let checkedCount = checkedWantBook.length;
-      alert('aa');
       if(checkedCount>(4-this.props.userStore.rentCount)){
         this.props.dispatch(showAlert(true,'警告','超出借书数量，请先还书'))
       }else{
@@ -51,8 +50,6 @@ export  class Borrow extends React.Component {
         $.each(checkedWantBook,(index,elem)=>{
             this.props.dispatch(borrowBook(this.props.userStore.user._id,elem._id,elem.name)).then(()=>{
               this.props.dispatch(setUserRentCount('add'))
-              console.log('checkedCount',checkedCount);
-
               checkedCount=checkedCount-1;
               if(checkedCount==0){
                 this.props.dispatch(showLoading(false));
