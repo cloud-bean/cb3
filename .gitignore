@@ -1,5 +1,6 @@
 node_modules/
 .idea/
-dist/
 libs/
 *.log
+dist/bundle.js
+dist/bundle.css
