@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "we build cloud-bean 3.0",
   "scripts": {
-    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "deploy": "NODE_ENV=production webpack --config webpack.production.config.js",
+    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --colors",
+    "deploy": "NODE_ENV=production webpack --config webpack.production.config.js && node server.js",
     "test": "./node_modules/mocha/bin/mocha  --compilers js:babel-core/register --require ./test/testHelper.js 'test/**/*.@(js|jsx)'"
   },
   "repository": {
@@ -62,7 +62,6 @@
   "dependencies": {
     "classnames": "^2.2.1",
     "express": "^4.13.4",
-    "history": "^1.13.1",
     "isomorphic-fetch": "^2.2.0",
     "jquery": "^2.1.4",
     "normalize.css": "^3.0.3",
@@ -72,11 +71,9 @@
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.1",
     "react-router": "^2.0.0",
-    "react-toolbox": "^0.13.3",
     "react-weui": "^0.2.0",
     "redux": "^3.0.5",
     "redux-thunk": "^1.0.2",
-    "underscore": "^1.8.3",
     "weui": "^0.3.0"
   }
 }
