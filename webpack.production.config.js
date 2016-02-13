@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-const autoprefixer = require('autoprefixer');
+const autoPreFixer = require('autoprefixer');
 const path = require('path');
 
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
     entry: [
         './src/index.jsx'
     ],
-    postcss: [autoprefixer],
+    postCss: [autoPreFixer],
     resolve: {
         extensions: ['', '.js', '.jsx', '.scss']
     },
@@ -23,11 +23,15 @@ module.exports = {
             include: /src/,
             loader: 'babel'
         }, {
-            test: /(\.scss|\.css)$/,
-            loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass?sourceMap')
+            test: /\.scss$/,
+            loader: ExtractTextPlugin.extract('style', 'css!postCss!sass')
         }, {
-            test: /\.(png|jpe?g|gif|svg)$/,
-            loader: 'url?limit=10000'
+            test: /\.css$/,
+            loader: ExtractTextPlugin.extract('style', 'css')
+        },
+            {
+            test: /\.(png|jpe?g|gif|woff|woff2|eot|ttf|svg)$/,
+            loader: 'url?limit=81920'
         }]
     },
     plugins: [
