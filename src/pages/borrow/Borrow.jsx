@@ -8,8 +8,7 @@ import {showAlert,showLoading} from '../../actions/promptAction';
 import WeUI from 'react-weui';
 import {connect} from 'react-redux';
 import $ from 'jquery';
-
-
+import PageHeader from '../../components/pageHeader/pageHeader';
 const {Button,ButtonArea,Toast,Dialog} = WeUI;
 const {Alert} = Dialog;
 
@@ -64,6 +63,7 @@ export  class Borrow extends React.Component {
         const {loading,wantedBooks,dispatch,userStore,status,prompt} = this.props;
         return (
             <div>
+                <PageHeader text="借书" />
               <Alert
                     show={prompt.alert.show}
                     title={prompt.alert.title}

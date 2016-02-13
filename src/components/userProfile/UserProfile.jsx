@@ -23,13 +23,3 @@ export default class UserProfile extends React.Component {
 	}
 }
 
-
-// function mapStateIntoModuleProps(state) {
-//     const userStore = state.userStore;
-//     return {
-//         user: userStore.user,
-//         loading: userStore.loading,
-//         rentCount:userStore.rentCount,
-//     };
-// }
-// export default connect(mapStateIntoModuleProps)(UserProfile);

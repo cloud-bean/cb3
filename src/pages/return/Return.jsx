@@ -6,7 +6,7 @@ import {setUserRentCount} from '../../actions/userAction';
 import {selectBook,getRecords,returnBook} from '../../actions/inventoryAction';
 import {connect} from 'react-redux';
 import {showAlert,showLoading} from '../../actions/promptAction';
-
+import PageHeader from '../../components/pageHeader/pageHeader';
 import WeUI from 'react-weui';
 
 const {Button,ButtonArea,Toast,Dialog} = WeUI;
@@ -64,6 +64,7 @@ export  class Return extends React.Component {
         const {loading,unReturnBooks,dispatch,userStore,prompt} = this.props;
         return (
             <div>
+                <PageHeader text="还书" />
               { prompt.loading ?
                   <Toast icon="loading" show={true}>
                       正在加载中...

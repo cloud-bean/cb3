@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import 'weui';
 const {Button, Toast,Alert} = WeUI;
 import './Main.scss';
+import PageHeader from '../../components/pageHeader/pageHeader';
 
 export class Main extends React.Component {
     constructor(props) {
@@ -21,6 +22,7 @@ export class Main extends React.Component {
         const {dispatch,userStore,prompt} = this.props;
         return (
             <div>
+                <PageHeader text="云豆自助图书借还" />
                 {prompt.loading ?
                     <Toast icon="loading" show={true}>
                         正在加载中...
