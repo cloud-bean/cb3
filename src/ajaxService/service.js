@@ -36,6 +36,7 @@ export function borrowBook(memberId,bookId,bookName){
     return $.ajax({
       url:url,
       type:'POST',
+      timeout:1000,
       data:dataStr,
       contentType:"application/x-www-form-urlencoded"
     });

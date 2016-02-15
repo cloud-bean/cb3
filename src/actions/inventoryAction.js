@@ -188,7 +188,10 @@ export function borrowBook(memberId,bookId,bookName) {
         // 这并不是 redux middleware 所必须的，但这对于我们而言很方便。
         return service.borrowBook(memberId,bookId,bookName).then((value)=> {
             dispatch(borrowBookSuccess(value));
-        }, (err)=> {
+        }).fail((err)=> {
+          //todo: 判断err.readystate 来处理不同错误
+            dispatch(showLoading(false));
+            dispatch(showAlert(true, '提示', err.responseText))
             dispatch(borrowBookFailure(err));
         });
     }
