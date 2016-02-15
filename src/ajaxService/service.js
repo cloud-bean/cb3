@@ -31,22 +31,14 @@ export function getRentedBookOfMember(memberid){
 
 
 export function borrowBook(memberId,bookId,bookName){
-  return new Promise((resovle,reject)=>{
     let url = GENERAL_CONFIG.baseUrl + '/records/mob/create';
     let dataStr = 'mId=' + memberId + '&bId=' + bookId + '&status=R';
-    $.ajax({
+    return $.ajax({
       url:url,
       type:'POST',
       data:dataStr,
-      contentType:"application/x-www-form-urlencoded",
-      success:(data)=>{
-        resovle(data);
-      },
-      error:(data)=>{
-        reject(data);
-      }
+      contentType:"application/x-www-form-urlencoded"
     });
-  })
 }
 
 export function returnBook(recordId,bookName){

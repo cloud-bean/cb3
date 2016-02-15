@@ -39,7 +39,7 @@ export  class Borrow extends React.Component {
         if(elem.isSelected==true){
           checkedWantBook.push(elem.book);
         }
-      })
+      });
       let checkedCount = checkedWantBook.length;
       if(checkedCount>(4-this.props.userStore.rentCount)){
         this.props.dispatch(showAlert(true,'警告','超出借书数量，请先还书'))

@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import {showAlert,showLoading} from '../../actions/promptAction';
 import PageHeader from '../../components/pageHeader/pageHeader';
 import WeUI from 'react-weui';
+import $ from 'jquery';
 
 const {Button,ButtonArea,Toast,Dialog} = WeUI;
 const {Alert} = Dialog;
@@ -35,19 +36,19 @@ export  class Return extends React.Component {
     }
     handleClick(e){
       let checkedReturnBook = [];
-      for (let elem of this.props.unReturnBooks){
+      $.each(this.props.unReturnBooks,(index,elem)=>{
         if(elem.isSelected==true){
           checkedReturnBook.push(elem);
         }
-      }
-
+      });
+      console.log('test');
       let checkedCount = checkedReturnBook.length;
       if(checkedCount==0){
         this.props.dispatch(showAlert(true,'警告','请至少选择一本要归还的图书'));
       }else{
         //确认借书操作
         this.props.dispatch(showLoading(true));
-        for (let elem of checkedReturnBook){
+        $.each(checkedReturnBook,(index,elem)=>{
             this.props.dispatch(returnBook(elem.recordId)).then(()=>{
               this.props.dispatch(setUserRentCount('min'))
               checkedCount=checkedCount-1;
@@ -56,7 +57,7 @@ export  class Return extends React.Component {
                 this.props.dispatch(showAlert(true,'提示','还书成功'));
               }
             });
-        }
+        });
       }
       //this.props.dispatch();
     }
