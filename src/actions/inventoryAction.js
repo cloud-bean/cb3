@@ -135,7 +135,9 @@ export function addWantedBook(bookid) {
           }else{
             dispatch(showAlert(true,'警告','所选图书已借出'));
           }
-        }, (err)=> {
+        }).fail((err)=> {
+            dispatch(showLoading(false));
+            dispatch(showAlert(true, '提示', err.responseText))
             dispatch(addWantedBookFailure(err));
         });
     }

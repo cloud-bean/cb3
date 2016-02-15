@@ -36,17 +36,21 @@ class Signup extends React.Component {
 
     handleClick() {
         const dispatch = this.props.dispatch;
-        dispatch(showLoading(true));
-        dispatch(fetchUser(this.state.phone))
-            .then((value)=> {
-                dispatch(showLoading(false));
-                browserHistory.push('/main');
-            })
-            .fail((err)=> {
-                console.log(err);
-                dispatch(showLoading(false));
-                dispatch(showAlert(true, '提示', err.responseText))
-            });
+        if(this.state.phone){
+          dispatch(showLoading(true));
+          dispatch(fetchUser(this.state.phone))
+              .then((value)=> {
+                  dispatch(showLoading(false));
+                  browserHistory.push('/main');
+              })
+              .fail((err)=> {
+                  dispatch(showLoading(false));
+                  dispatch(showAlert(true, '提示', err.responseText))
+              });
+        }else{
+          dispatch(showAlert(true, '提示', '请填写手机号'));
+        }
+
     }
 
     render() {
