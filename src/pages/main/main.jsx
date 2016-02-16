@@ -5,7 +5,7 @@ import UserProfile from './../../components/userProfile/UserProfile';
 import {fetchRecords} from '../../actions/inventoryAction';
 import * as service from '../../ajaxService/service';
 import {connect} from 'react-redux';
-import 'weui';
+
 const {Button, Toast,Alert} = WeUI;
 import './Main.scss';
 import PageHeader from '../../components/pageHeader/pageHeader';

@@ -3,6 +3,7 @@ import appRoutes from './appRoutes';
 import { Provider } from 'react-redux';
 import {Router,browserHistory} from 'react-router';
 import store from './reduxStore';
+import 'weui';
 
 const APP =
     <Provider store = {store} >
