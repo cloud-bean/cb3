@@ -63,7 +63,7 @@ export  class Borrow extends React.Component {
     }
 
     render() {
-        const {loading,wantedBooks,dispatch,userStore,status,prompt} = this.props;
+        const {loading,wantedBooks,dispatch,userStore,status,prompt,unReturnBooks} = this.props;
         return (
             <div>
                 <PageHeader text="借书" />
@@ -76,9 +76,9 @@ export  class Borrow extends React.Component {
               <Toast icon="loading" show={prompt.loading}>
                   正在加载中...
               </Toast>
-              <UserProfile userStore={userStore}></UserProfile>
+              <UserProfile userStore={userStore} unReturnBooks={unReturnBooks}></UserProfile>
               <AddBookBar onAddClick={invCode=>dispatch(addWantedBook(invCode))}></AddBookBar>
-              <BookList listName='预借阅列表' books={wantedBooks} onSelect={index=>dispatch(selectBook(index,'borrow'))}> </BookList>
+              <BookList hasCheckedButton={true} listName='预借阅列表' books={wantedBooks} onSelect={index=>dispatch(selectBook(index,'borrow'))}> </BookList>
                 <ButtonArea>
                     <Button onClick={e=>this.handleClick(e)}>确认借阅</Button>
                 </ButtonArea>
@@ -92,6 +92,7 @@ function mapStateIntoModuleProps(state) {
         userStore:state.userStore,
         loading: inventoryStore.loading,
         wantedBooks:inventoryStore.wantedBooks,
+        unReturnBooks:inventoryStore.unReturnBooks,
         status:inventoryStore.status,
         prompt:state.prompt,
     };
