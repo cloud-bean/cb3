@@ -21,12 +21,11 @@ export default class UserProfile extends React.Component {
 
                     </Cell>
 										{this.props.unReturnBooks?
-										<BookList hasCheckedButton={false} listName='已借图书' books={this.props.unReturnBooks} onSelect={index=>dispatch(selectBook(index,'return'))}> </BookList>
+											<BookList hasCheckedButton={false} listName='已借图书' books={this.props.unReturnBooks} onSelect={index=>dispatch(selectBook(index,'return'))}> </BookList>
 										:
-										<div></div>
+											<div></div>
 										}
                 </Cells>
-								
         </section>
 		)
 	}

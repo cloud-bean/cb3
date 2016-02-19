@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link,browserHistory} from 'react-router';
 import WeUI from 'react-weui';
 import UserProfile from './../../components/userProfile/UserProfile';
 import {getRecords} from '../../actions/inventoryAction';
@@ -27,8 +27,19 @@ export class Main extends React.Component {
             }
         };
     }
-    handleClick() {
-        // this.props.dispatch(fetchRecords(this.props.user._id));
+    handleReturnClick() {
+         if(this.props.userStore.rentCount===0){
+           this.props.dispatch(showAlert(true,'警告','亲，您还没借书呢，不用还书'));
+         }else{
+           browserHistory.push('/return')
+         }
+    }
+    handleBorrowClick() {
+         if(this.props.userStore.rentCount===4){
+           this.props.dispatch(showAlert(true,'警告','亲，请先还书，否则没法借书哦'));
+         }else{
+           browserHistory.push('/borrow')
+         }
     }
     hideAlert(){
         this.props.dispatch(showAlert(false));
@@ -55,8 +66,8 @@ export class Main extends React.Component {
                       </Alert>
                         <UserProfile userStore={userStore}  unReturnBooks={unReturnBooks}></UserProfile>
                         <div className="weui_btn_area">
-                            <Link to="/borrow"><Button >借书</Button></Link>
-                            <Link to="/return"><Button type='warn' style={{marginTop:'10px'}} onClick={e=>this.handleClick(e)}>还书</Button></Link>
+                            <Button onClick={e=>this.handleBorrowClick(e)}>借书</Button>
+                            <Button type='warn' style={{marginTop:'10px'}} onClick={e=>this.handleReturnClick(e)}>还书</Button>
                         </div>
                     </div>
                 }

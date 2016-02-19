@@ -16,12 +16,20 @@ export default class BookList extends React.Component {
       }
 
         return (
-            <section>
-                <CellsTitle>{this.props.listName}</CellsTitle>
-                <Cells>
-                  {books}
-                </Cells>
+
+          <section>
+          {books.length===0?
+          <div></div>
+          :
+          <div>
+          <CellsTitle>{this.props.listName}</CellsTitle>
+            <Cells>
+              {books}
+            </Cells>
+          </div>
+          }
             </section>
+
         )
     }
 }
