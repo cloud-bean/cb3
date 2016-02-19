@@ -15,7 +15,7 @@ export default class UserProfile extends React.Component {
                 <Cells access>
                     <Cell className="list_item">
                         <CellBody>
-                            <h2 className="title">{user.baby_name}（已借{rentCount}/4）</h2>
+                            <h2 className="title">{user.baby_name}（已借{rentCount}/{user.max_book}）</h2>
                             <p className="desc">会员卡号:{user.card_number}</p>
                         </CellBody>
 

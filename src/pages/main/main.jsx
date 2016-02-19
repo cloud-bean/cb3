@@ -29,14 +29,14 @@ export class Main extends React.Component {
     }
     handleReturnClick() {
          if(this.props.userStore.rentCount===0){
-           this.props.dispatch(showAlert(true,'警告','亲，您还没借书呢，不用还书'));
+           this.props.dispatch(showAlert(true,'警告','亲，您当前没有需要还的书哦'));
          }else{
            browserHistory.push('/return')
          }
     }
     handleBorrowClick() {
-         if(this.props.userStore.rentCount===4){
-           this.props.dispatch(showAlert(true,'警告','亲，请先还书，否则没法借书哦'));
+         if(this.props.userStore.rentCount===this.props.userStore.user.max_book){
+           this.props.dispatch(showAlert(true,'警告','亲，请先还书否则没法借书哦'));
          }else{
            browserHistory.push('/borrow')
          }

@@ -1,7 +1,7 @@
 import React from 'react';
 import UserProfile from './../../components/userProfile/UserProfile';
 import BookList from './../../components/BookList';
-import BookItem from './../../components/BookItem';
+import BookItem from './../../components/bookItem/BookItem';
 import {browserHistory} from 'react-router';
 import {setUserRentCount} from '../../actions/userAction';
 import {selectBook,getRecords,returnBook} from '../../actions/inventoryAction';
@@ -45,7 +45,7 @@ export  class Return extends React.Component {
       console.log('test');
       let checkedCount = checkedReturnBook.length;
       if(checkedCount==0){
-        this.props.dispatch(showAlert(true,'警告','请至少选择一本要归还的图书'));
+        this.props.dispatch(showAlert(true,'警告','请您选择要归还的图书'));
       }else{
         //确认借书操作
         this.props.dispatch(showLoading(true));

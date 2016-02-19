@@ -42,10 +42,11 @@ export  class Borrow extends React.Component {
         }
       });
       let checkedCount = checkedWantBook.length;
-      if(checkedCount>(4-this.props.userStore.rentCount)){
-        this.props.dispatch(showAlert(true,'警告','超出借书数量，请先还书'))
+      let couldRentCount = this.props.userStore.user.max_book-this.props.userStore.rentCount;
+      if(checkedCount > couldRentCount){
+        this.props.dispatch(showAlert(true,'警告','当前您最多可以借' + couldRentCount +'本书'))
       }else if(checkedCount==0){
-        this.props.dispatch(showAlert(true,'警告','至少选择一本要借的图书'))
+        this.props.dispatch(showAlert(true,'警告','请您至少选择一本要借的图书'))
       }else{
         //确认借书操作
         this.props.dispatch(showLoading(true));

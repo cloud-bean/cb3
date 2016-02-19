@@ -48,7 +48,7 @@ class Signup extends React.Component {
                   if(this.props.userStore.user.locked==false){
                     browserHistory.push('/main');
                   }else{
-                    dispatch(showAlert(true, '提示', '您的账户被锁定，请与管理员联系'));
+                    dispatch(showAlert(true, '提示', '亲爱的老会员您好，您的账户目前不可用，需要任何帮助请拨打服务热线：15389088570'));
                   }
               })
               .fail((err)=> {
@@ -83,12 +83,10 @@ class Signup extends React.Component {
                         <div className="weui_cell_hd"><label className="weui_label">手机号</label></div>
                         <div className="weui_cell_bd weui_cell_primary">
                             <input ref="phone" className="weui_input"
-                                   onChange={this.handleChange} type="tel" placeholder="请输入手机号"/>
+                                   onChange={this.handleChange} type="tel" placeholder="输入您注册会员时的手机号"/>
                         </div>
                     </div>
                 </div>
-                <div className="weui_cells_tips">请输入您注册会员时的手机号</div>
-
                 <div className="weui_btn_area">
                     <Button onClick={this.handleClick}>确定</Button>
                 </div>

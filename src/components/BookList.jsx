@@ -1,6 +1,6 @@
 import React from 'react';
 import WeUI from 'react-weui';
-import BookItem from './BookItem';
+import BookItem from './bookItem/BookItem';
 import * as service from '../ajaxService/service'
 const {Cells, CellsTitle, CellsTips, Cell, CellHeader, CellBody, CellFooter} = WeUI;
 export default class BookList extends React.Component {
