@@ -45,7 +45,11 @@ class Signup extends React.Component {
               })
               .then((value)=>{
                   dispatch(showLoading(false));
-                  browserHistory.push('/main');
+                  if(this.props.userStore.user.locked==false){
+                    browserHistory.push('/main');
+                  }else{
+                    dispatch(showAlert(true, '提示', '您的账户被锁定，请与管理员联系'));
+                  }
               })
               .fail((err)=> {
                   dispatch(showLoading(false));

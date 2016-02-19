@@ -37,6 +37,7 @@ export function fetchUser(phone) {
         // 这并不是 redux middleware 所必须的，但这对于我们而言很方便。
         return service.getMembyPhone(phone).then((value)=> {
             dispatch(userSuccess(value));
+            console.log(value);
             // dispatch(showLoading(false));
         }
         // , (err)=> {

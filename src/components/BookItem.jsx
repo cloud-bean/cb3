@@ -6,7 +6,7 @@ export default class BookItem extends React.Component {
         return (
             <div>
                     <div className="weui_cell">
-                        <div className="weui_cell_hd weui_cell_primary">{this.props.bookName}</div>
+                        <div className="weui_cell_hd weui_cell_primary">{this.props.book.name}<span className='desc'>[{this.props.book.inv_code}]</span></div>
                         {this.props.hasCheckedButton?
                           <div className="weui_cell_ft">
                               <input onChange={this.props.onChange} className="weui_switch" type="checkbox" checked={this.props.checked}/>
