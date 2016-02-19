@@ -2,6 +2,7 @@ import React from 'react';
 import UserProfile from './../../components/userProfile/UserProfile';
 import BookList from './../../components/BookList';
 import AddBookBar from './../../components/AddBookBar';
+import {browserHistory} from 'react-router';
 import {setUserRentCount} from '../../actions/userAction';
 import {addWantedBook,selectBook,borrowBook} from '../../actions/inventoryAction';
 import {showAlert,showLoading} from '../../actions/promptAction';
@@ -55,6 +56,7 @@ export  class Borrow extends React.Component {
               if(checkedCount==0){
                 this.props.dispatch(showLoading(false));
                 this.props.dispatch(showAlert(true,'提示','借书成功'));
+                browserHistory.push('/main');
               }
             });
         });

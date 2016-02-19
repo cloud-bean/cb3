@@ -6,17 +6,32 @@ import {getRecords} from '../../actions/inventoryAction';
 
 import * as service from '../../ajaxService/service';
 import {connect} from 'react-redux';
+import {showAlert,showLoading} from '../../actions/promptAction';
 
-const {Button, Toast,Alert} = WeUI;
+const {Button, Toast,Dialog} = WeUI;
+const {Alert} = Dialog;
 import './Main.scss';
 import PageHeader from '../../components/pageHeader/pageHeader';
 
 export class Main extends React.Component {
     constructor(props) {
         super(props);
+        this.state={
+            alert: {
+                buttons: [
+                    {
+                        label: '好的',
+                        onClick: this.hideAlert.bind(this)
+                    }
+                ]
+            }
+        };
     }
     handleClick() {
         // this.props.dispatch(fetchRecords(this.props.user._id));
+    }
+    hideAlert(){
+        this.props.dispatch(showAlert(false));
     }
     componentDidMount(){
       this.props.dispatch(getRecords(this.props.userStore.user._id))
@@ -32,6 +47,12 @@ export class Main extends React.Component {
                     </Toast>
                     :
                     <div>
+                      <Alert
+                            show={prompt.alert.show}
+                            title={prompt.alert.title}
+                            buttons={this.state.alert.buttons}>
+                                {prompt.alert.content}
+                      </Alert>
                         <UserProfile userStore={userStore}  unReturnBooks={unReturnBooks}></UserProfile>
                         <div className="weui_btn_area">
                             <Link to="/borrow"><Button >借书</Button></Link>

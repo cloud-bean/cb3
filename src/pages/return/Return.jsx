@@ -2,6 +2,7 @@ import React from 'react';
 import UserProfile from './../../components/userProfile/UserProfile';
 import BookList from './../../components/BookList';
 import BookItem from './../../components/BookItem';
+import {browserHistory} from 'react-router';
 import {setUserRentCount} from '../../actions/userAction';
 import {selectBook,getRecords,returnBook} from '../../actions/inventoryAction';
 import {connect} from 'react-redux';
@@ -55,6 +56,7 @@ export  class Return extends React.Component {
               if(checkedCount==0){
                 this.props.dispatch(showLoading(false));
                 this.props.dispatch(showAlert(true,'提示','还书成功'));
+                browserHistory.push('/main');
               }
             });
         });
