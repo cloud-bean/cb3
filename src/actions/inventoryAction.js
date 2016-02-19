@@ -126,6 +126,9 @@ export function addWantedBookFailure(err) {
 }
 export function addWantedBook(bookid) {
     return function (dispatch) {
+        if (bookid.length === 0) {
+            return dispatch(showAlert(true,'警告','请输入图书编码'));
+        }
         dispatch(addWantedBookRequest());
         dispatch(showLoading(true));
         return service.getBookbyId(bookid).then((book)=> {

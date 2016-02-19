@@ -68,7 +68,7 @@ class Signup extends React.Component {
                     正在加载中...
                 </Toast>
 
-                <PageHeader text="用户登录"/>
+                <PageHeader text="绘本自助借阅"/>
 
                 <div className="weui_cells weui_cells_form">
                     <div className="weui_cell">

@@ -22,7 +22,7 @@ export class Main extends React.Component {
         const {dispatch,userStore,prompt} = this.props;
         return (
             <div>
-                <PageHeader text="云豆自助图书借还" />
+                <PageHeader text="绘本自助借阅" />
                 {prompt.loading ?
                     <Toast icon="loading" show={true}>
                         正在加载中...
@@ -30,7 +30,7 @@ export class Main extends React.Component {
                     :
                     <div>
                         <UserProfile userStore={userStore}></UserProfile>
-                        <div className="button" spacing>
+                        <div className="weui_btn_area">
                             <Link to="/borrow"><Button >借书</Button></Link>
                             <Link to="/return"><Button type='warn' style={{marginTop:'10px'}} onClick={e=>this.handleClick(e)}>还书</Button></Link>
                         </div>
