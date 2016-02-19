@@ -32,7 +32,7 @@ export  class Return extends React.Component {
         this.props.dispatch(showAlert(false));
     }
     componentDidMount(){
-      this.props.dispatch(getRecords(this.props.userStore.user._id))
+      //this.props.dispatch(getRecords(this.props.userStore.user._id))
     }
     handleClick(e){
       let checkedReturnBook = [];
@@ -79,7 +79,7 @@ export  class Return extends React.Component {
                               {prompt.alert.content}
                     </Alert>
                 <UserProfile userStore={userStore}></UserProfile>
-                <BookList listName='还书列表' books={unReturnBooks} onSelect={index=>dispatch(selectBook(index,'return'))}> </BookList>
+                <BookList hasCheckedButton={true} listName='还书列表' books={unReturnBooks} onSelect={index=>dispatch(selectBook(index,'return'))}> </BookList>
                 <ButtonArea>
                     <Button onClick={e=>this.handleClick(e)}>归还图书</Button>
                 </ButtonArea>

@@ -3,6 +3,7 @@ import {Link,browserHistory} from 'react-router';
 import WeUI from 'react-weui';
 import store from '../../reduxStore';
 import {fetchUser} from '../../actions/userAction';
+import {getRecords} from '../../actions/inventoryAction';
 import {showAlert,showLoading} from '../../actions/promptAction';
 import {connect} from 'react-redux';
 const {Button,ButtonArea,Toast,Dialog} = WeUI;
@@ -40,6 +41,9 @@ class Signup extends React.Component {
           dispatch(showLoading(true));
           dispatch(fetchUser(this.state.phone))
               .then((value)=> {
+                  dispatch(getRecords(this.props.userStore.user._id))
+              })
+              .then((value)=>{
                   dispatch(showLoading(false));
                   browserHistory.push('/main');
               })
@@ -90,6 +94,7 @@ class Signup extends React.Component {
 }
 function mapStateIntoModuleProps(state) {
     return {
+        userStore : state.userStore,
         prompt: state.prompt
     };
 }
