@@ -76,7 +76,7 @@ export  class Borrow extends React.Component {
               <Toast icon="loading" show={prompt.loading}>
                   正在加载中...
               </Toast>
-              <UserProfile userStore={userStore} unReturnBooks={unReturnBooks}></UserProfile>
+              <UserProfile userStore={userStore}></UserProfile>
               <AddBookBar onAddClick={invCode=>dispatch(addWantedBook(invCode))}></AddBookBar>
               <BookList hasCheckedButton={true} listName='预借阅列表' books={wantedBooks} onSelect={index=>dispatch(selectBook(index,'borrow'))}> </BookList>
                 <ButtonArea>

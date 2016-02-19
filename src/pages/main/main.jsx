@@ -2,7 +2,8 @@ import React from 'react';
 import {Link} from 'react-router';
 import WeUI from 'react-weui';
 import UserProfile from './../../components/userProfile/UserProfile';
-import {fetchRecords} from '../../actions/inventoryAction';
+import {getRecords} from '../../actions/inventoryAction';
+
 import * as service from '../../ajaxService/service';
 import {connect} from 'react-redux';
 
@@ -17,9 +18,11 @@ export class Main extends React.Component {
     handleClick() {
         // this.props.dispatch(fetchRecords(this.props.user._id));
     }
-
+    componentDidMount(){
+      this.props.dispatch(getRecords(this.props.userStore.user._id))
+    }
     render() {
-        const {dispatch,userStore,prompt} = this.props;
+        const {dispatch,userStore,prompt,unReturnBooks} = this.props;
         return (
             <div>
                 <PageHeader text="绘本自助借阅" />
@@ -29,7 +32,7 @@ export class Main extends React.Component {
                     </Toast>
                     :
                     <div>
-                        <UserProfile userStore={userStore}></UserProfile>
+                        <UserProfile userStore={userStore}  unReturnBooks={unReturnBooks}></UserProfile>
                         <div className="weui_btn_area">
                             <Link to="/borrow"><Button >借书</Button></Link>
                             <Link to="/return"><Button type='warn' style={{marginTop:'10px'}} onClick={e=>this.handleClick(e)}>还书</Button></Link>
@@ -42,8 +45,10 @@ export class Main extends React.Component {
 }
 function mapStateIntoModuleProps(state) {
     const userStore = state.userStore;
+    const inventoryStore =state.inventoryStore;
     return {
         userStore:userStore,
+        unReturnBooks:inventoryStore.unReturnBooks,
         prompt:state.prompt,
     };
 }
