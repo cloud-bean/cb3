@@ -1,6 +1,5 @@
 import React from 'react';
 import WeUI from 'react-weui';
-import { connect} from 'react-redux';
 import BookList from './../../components/BookList';
 
 const {Cells, CellsTitle, CellsTips, Cell, CellHeader, CellBody, CellFooter,Icon} = WeUI;
@@ -21,7 +20,7 @@ export default class UserProfile extends React.Component {
 
                     </Cell>
 										{this.props.unReturnBooks?
-											<BookList hasCheckedButton={false} listName='已借图书' books={this.props.unReturnBooks} onSelect={index=>dispatch(selectBook(index,'return'))}> </BookList>
+											<BookList hasCheckedButton={false} listName='已借图书' books={this.props.unReturnBooks}> </BookList>
 										:
 											<div></div>
 										}

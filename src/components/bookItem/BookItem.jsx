@@ -1,6 +1,4 @@
 import React from 'react';
-import WeUI from 'react-weui';
-const {Cells, CellsTitle, CellsTips, Cell, CellHeader, CellBody, CellFooter,Icon} = WeUI;
 import './BookItem.scss';
 
 export default class BookItem extends React.Component {
