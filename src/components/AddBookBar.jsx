@@ -11,6 +11,16 @@ export default class AddBookBar extends React.Component {
         findDOMNode(this.refs.invCode).value='';
         this.props.onAddClick(invCode);
     }
+    handleScanClick(e){
+      wx.scanQRCode({
+        needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+        scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+        success: function (res) {
+          var result = res.resultStr;
+          findDOMNode(this.refs.invCode).value = result.split(',')[1]; // 当needResult 为 1 时，扫码返回的结果
+        }
+      });
+    }
     render() {
         return (
             <div className="weui_cells weui_cells_form">
@@ -21,7 +31,7 @@ export default class AddBookBar extends React.Component {
                     </div>
                 </div>
                 <ButtonArea>
-                    {/*<Button plain="true">扫描</Button>*/}
+                    <Button plain="true" id='scanQRCode0' onClick={e=>this.handleScanClick(e)}>扫描</Button>
                     <Button plain="true" onClick={e=>this.handleClick(e)}>添加至预借阅列表</Button>
                 </ButtonArea>
             </div>
