@@ -7,27 +7,29 @@ export default class BookList extends React.Component {
     constructor(props) {
         super(props);
     }
+
     render() {
-      let books = [];
-      if(this.props.books){
-        books = this.props.books.map((item,index)=> {
-                return (<BookItem hasCheckedButton={this.props.hasCheckedButton} book={item.book} key={index} checked={item.isSelected} onChange={()=>this.props.onSelect(index)}></BookItem>)
-        });
-      }
+        let books = [];
+        if (this.props.books) {
+            books = this.props.books.map((item, index)=> {
+                return (<BookItem hasCheckedButton={this.props.hasCheckedButton} book={item.book} key={index}
+                                  checked={item.isSelected} onChange={()=>this.props.onSelect(index)}></BookItem>)
+            });
+        }
 
         return (
 
-          <section>
-          {books.length===0?
-          <div></div>
-          :
-          <div>
-          <CellsTitle>{this.props.listName}</CellsTitle>
-            <Cells>
-              {books}
-            </Cells>
-          </div>
-          }
+            <section>
+                {books.length === 0 ?
+                    <div></div>
+                    :
+                    <div>
+                        <CellsTitle>{this.props.listName}</CellsTitle>
+                        <Cells>
+                            {books}
+                        </Cells>
+                    </div>
+                }
             </section>
 
         )

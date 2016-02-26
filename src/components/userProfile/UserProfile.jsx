@@ -19,11 +19,11 @@ export default class UserProfile extends React.Component {
                         </CellBody>
 
                     </Cell>
-										{this.props.unReturnBooks?
-											<BookList hasCheckedButton={false} listName='已借图书' books={this.props.unReturnBooks}> </BookList>
-										:
-											<div></div>
-										}
+                    {this.props.unReturnBooks?
+                        <BookList hasCheckedButton={false} listName='已借图书' books={this.props.unReturnBooks}> </BookList>
+                        :
+                        <div></div>
+                    }
                 </Cells>
         </section>
 		)
