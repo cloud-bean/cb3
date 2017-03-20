@@ -10,7 +10,6 @@ import {showAlert,showLoading} from '../../actions/promptAction';
 
 const {Button, Toast,Dialog} = WeUI;
 const {Alert} = Dialog;
-import './Main.scss';
 import PageHeader from '../../components/pageHeader/pageHeader';
 
 export class Main extends React.Component {
