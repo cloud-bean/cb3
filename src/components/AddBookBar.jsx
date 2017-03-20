@@ -2,7 +2,7 @@ import React from 'react';
 import WeUI from 'react-weui';
 import {connect} from 'react-redux';
 import {findDOMNode} from 'react-dom';
-
+const wx = require('jweixin');
 
 const {Button,ButtonArea} = WeUI;
 export default class AddBookBar extends React.Component {
